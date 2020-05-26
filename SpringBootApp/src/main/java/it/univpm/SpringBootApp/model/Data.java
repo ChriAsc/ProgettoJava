@@ -7,21 +7,21 @@ package it.univpm.SpringBootApp.model;
  */
 
 public class Data {
-	public String id;
-	public boolean can_upload;
-	public int count;
-	public String cover_photo;
-	public String created_time;
-	public String description;
-	public String event;
-	public String from;
-	public String link;
-	public String location;
-	public String name;
-	public String place;
-	public String privacy;
-	public String type;
-	public String updated_time;
+	protected String id;
+	protected boolean can_upload;
+	protected int count;
+	protected String cover_photo;
+	protected String created_time;
+	protected String description;
+	protected String event;
+	protected String from;
+	protected String link;
+	protected String location;
+	protected String name;
+	protected String place;
+	protected String privacy;
+	protected String type;
+	protected String updated_time;
 
 
 /**

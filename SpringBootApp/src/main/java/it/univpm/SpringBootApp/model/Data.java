@@ -16,6 +16,7 @@ public class Data {
 	protected String link;
 	protected String location;
 	protected String name;
+	protected Place place;
 	protected String privacy;
 	protected String type;
 	protected String updated_time;
@@ -34,13 +35,13 @@ public class Data {
 * @param name;
 * @param place;
 * @param privacy;
-* @param type{app, cover, profile, mobile, wall, normal, album};
+* @param type;
 * @param updated_time;
  */
 
 public Data(String id, boolean can_upload, int count, String created_time,
 String description, String event, String link, String location,
-String name, String place, String privacy, String type, String updated_time) {
+String name, Place place, String privacy, String type, String updated_time) {
 	this.id=id;
 	this.can_upload=can_upload;
 	this.count=count;
@@ -50,10 +51,162 @@ String name, String place, String privacy, String type, String updated_time) {
 	this.link=link;
 	this.location=location;
 	this.name=name;
+	this.place=place;
 	this.privacy=privacy;
 	this.type=type;
 	this.updated_time=updated_time;
 	}
+
+public class Place{
+	protected String name_place;
+	protected Location location_place;
+	protected String id_place;	
+	
+	/**
+	 * Metodo che restituisce name_place
+	 * @return name_place
+	 */
+	public String getname_place() {
+		return name_place;
+	}
+	
+	/**
+	 * Metodo che restituisce location_place
+	 * @return location_place
+	 */
+	public Location getlocation_place() {
+		return location_place;
+	}
+	
+	/**
+	 * Metodo che restituisce id_place
+	 * @return id_place
+	 */
+	public String getid_place() {
+		return id_place;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di name_place
+	 * @param name_place
+	 */
+
+	public void setname_place(String name_place) {
+		this.name_place = name_place;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di location_place
+	 * @param location_place
+	 */
+
+	public void setlocation_place(Location location_place) {
+		this.location_place = location_place;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di id_place
+	 * @param id_place
+	 */
+
+	public void setid_place(String id_place) {
+		this.id_place = id_place;
+	}
+	
+}
+
+public class Location{
+	protected String city_location;
+	protected String country_location;
+	protected double latitude_location;
+	protected double longitude_location;
+	protected String zip_location;
+	
+	/**
+	 * Metodo che restituisce city_location
+	 * @return city_location
+	 */
+	public String getcity_location() {
+		return city_location;
+	}
+	
+	/**
+	 * Metodo che restituisce country_location
+	 * @return country_location
+	 */
+	public String getcountry_location() {
+		return country_location;
+	}
+	
+	/**
+	 * Metodo che restituisce latitude_location
+	 * @return latitude_location
+	 */
+	public double getlatitude_location() {
+		return latitude_location;
+	}
+	
+	/**
+	 * Metodo che restituisce longitude_location
+	 * @return longitude_location
+	 */
+	public double getlongitude_location() {
+		return longitude_location;
+	}
+	
+	/**
+	 * Metodo che restituisce zip_location
+	 * @return zip_location
+	 */
+	public String getzip_location() {
+		return zip_location;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di city_location
+	 * @param city_location
+	 */
+
+	public void setcity_location(String city_location) {
+		this.city_location = city_location;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di country_location
+	 * @param country_location
+	 */
+	
+	public void setcountry_location(String country_location) {
+		this.country_location = country_location;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di latitude_location
+	 * @param latitude_location
+	 */
+	
+	public void setlatitude_location(double latitude_location) {
+		this.latitude_location = latitude_location;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di longitude_location
+	 * @param longitude_location
+	 */
+	
+	public void setlongitude_location(double longitude_location) {
+		this.longitude_location = longitude_location;
+	}
+	
+	/**
+	 * Metodo che imposta il valore di zip_location
+	 * @param zip_location
+	 */
+	
+	public void setzip_location(String zip_location) {
+		this.zip_location = zip_location;
+	}
+}
 
 /**
  * costruttore vuoto per la classe Data
@@ -172,6 +325,15 @@ public String getupdated_time() {
 }
 
 /**
+ * Metodo che restituisce place
+ * @return place
+ */
+
+public Place getplace() {
+	return place;
+}
+
+/**
  * Metodo che imposta il valore di id
  * @param id
  */
@@ -279,4 +441,12 @@ public void setupdated_time(String updated_time) {
 	this.updated_time = updated_time;
 }
 
+/**
+ * Metodo che imposta il valore di place
+ * @param place
+ */
+
+public void setplace(Place place) {
+	this.place = place;
+}
 }

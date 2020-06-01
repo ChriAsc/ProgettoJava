@@ -30,7 +30,7 @@ public class Database {
 		arrMetadata.add(new Metadata("link", "string"));
 		arrMetadata.add(new Metadata("location", "string"));
 		arrMetadata.add(new Metadata("name", "string"));
-		//arrMetadata.add(new Metadata("place", "string"));
+		arrMetadata.add(new Metadata("place", "Place"));
 		arrMetadata.add(new Metadata("privacy", "string"));
 		arrMetadata.add(new Metadata("type", "string"));
 		arrMetadata.add(new Metadata("updated_time", "float"));

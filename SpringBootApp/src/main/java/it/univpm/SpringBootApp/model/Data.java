@@ -20,7 +20,7 @@ public class Data {
 	protected String link;
 	protected String location;
 	protected String name;
-	protected ArrayList<Place> place;
+	//protected ArrayList<Place> place;
 	protected String privacy;
 	protected String type;
 	protected String updated_time;
@@ -45,7 +45,7 @@ public class Data {
 
 public Data(String id, boolean can_upload, int count, String created_time,
 String description, String event, String link, String location,
-String name, ArrayList<Place> place, String privacy, String type, String updated_time) {
+String name, /* ArrayList<Place> place,*/ String privacy, String type, String updated_time) {
 	this.id=id;
 	this.can_upload=can_upload;
 	this.count=count;
@@ -55,7 +55,7 @@ String name, ArrayList<Place> place, String privacy, String type, String updated
 	this.link=link;
 	this.location=location;
 	this.name=name;
-	this.place=place;
+	//this.place=place;
 	this.privacy=privacy;
 	this.type=type;
 	this.updated_time=updated_time;
@@ -183,11 +183,11 @@ public String getupdated_time() {
  * Metodo che restituisce place
  * @return place
  */
-
+/*
 public ArrayList<Place> getplace() {
 	return place;
 }
-
+*/
 /**
  * Metodo che imposta il valore di id
  * @param id
@@ -300,8 +300,8 @@ public void setupdated_time(String updated_time) {
  * Metodo che imposta il valore di place
  * @param place
  */
-
+/*
 public void setplace(ArrayList<Place> place) {
 	this.place = place;
-}
+}*/
 }

@@ -26,7 +26,6 @@ import it.univpm.SpringBootApp.service.ParserJSON;
 public class SpringBootAppApplication {
 	
 	public static ArrayList<Data> albumArrayList;
-	public static ArrayList<Place> placeArrayList;
 
 	public static void main(String[] args) throws IOException {
 		
@@ -41,20 +40,11 @@ public class SpringBootAppApplication {
 			}
 			ParserJSON parseFile = new ParserJSON();
 	        albumArrayList = parseFile.parserJson(file.getName());
+	        
 	        for (int i = 0; i<albumArrayList.size(); i++) {
 	        	System.out.println(albumArrayList.get(i).getid() + " = ID " + albumArrayList.get(i).getlink() + " = LINK " + albumArrayList.get(i).getlocation() + " = LOCATION " + albumArrayList.get(i).getname() + " = NAME " + albumArrayList.get(i).getprivacy() + " = PRIVACY "
 	        			+ albumArrayList.get(i).gettype() + " = TYPE " + albumArrayList.get(i).getupdated_time() + " = UPDATED TIME ");
-	        	placeArrayList = albumArrayList.get(i).getplace();
 	        	
-	        	if(placeArrayList != null) {
-	        		
-	        		Iterator<Place> it = placeArrayList.iterator();
-	        		while (it.hasNext()) { 
-	                    System.out.print(it.next().getid_place() + " PLACEID " + it.next().getname_place()+ " PLACENAME " + it.next().getlocation_place() + " PLACELOCATION ");
-	        				
-        				//System.out.println(albumArrayList.get(i).getplace().get(1).getid_place() + " = PLACEID " + albumArrayList.get(i).getplace().get(1).getname_place() + " = PLACENAME " + albumArrayList.get(i).getplace().get(1).getlocation_place() + " = LOCATIONPLACE ");
-	        		}
-	        	}
 	        }
 	        //SpringApplication.run(SpringBootAppApplication.class, args);
 		}

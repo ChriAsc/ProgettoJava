@@ -53,17 +53,20 @@ public class ParserJSON {
 	            a.setprivacy((String) array.get("privacy"));
 	            a.settype((String) array.get("type"));
 	            a.setupdated_time((String) array.get("updated_time"));
-	            
-	            
+
+	            /*
 	            JSONObject placeArray = (JSONObject) array.get("place");
-	            ArrayList<Place> Places = new ArrayList<>();
+	            
 	            
 	            if (placeArray != null) {
+	            	ArrayList<Place> Places = new ArrayList<>();	
 	            for (int j=0; j<placeArray.size(); j++) {
-	            	JSONObject jsonObj = (JSONObject) placeArray.get(j);
-	            	Place p = new Place();
 	            	
+	            	JSONObject jsonObj = (JSONObject) placeArray.get(j);
+	            	
+	            	Place p = new Place();
 	            	if (jsonObj != null) {
+	            	
 	            	p.setname_place((String) jsonObj.get("name"));
 	            	p.setid_place((String) jsonObj.get("id"));
 	            	
@@ -71,6 +74,7 @@ public class ParserJSON {
 	            	ArrayList<Location> Locations = new ArrayList<>();
 	            	
 	            	for (int k = 0; k < placeArray.size(); k++) {
+	            		
                         JSONObject jsonObject = (JSONObject) locArray.get(k);
                         Location l = new Location();
                         l.setcity_location((String) jsonObject.get("city"));
@@ -79,15 +83,19 @@ public class ParserJSON {
                         l.setlongitude_location((double) jsonObject.get("longitude"));
                         l.setzip_location((String) jsonObject.get("zip"));
                         Locations.add(l);
+                        
 	            	}
-	            	
 	            	p.setlocation_place(Locations);
-	            	}
-	            	Places.add(p);
+	            	
+	            	
 	            }
+
+	            	Places.add(p);
+	            	
 	            }
 	            a.setplace(Places);
-	            
+	            }
+	           */
 	            Albums.add(a);																//adding album to ArrayList of Album
 	        }
 	        

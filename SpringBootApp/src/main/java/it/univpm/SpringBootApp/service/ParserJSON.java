@@ -1,6 +1,8 @@
 package it.univpm.SpringBootApp.service;
 
 import it.univpm.SpringBootApp.model.Data;
+import it.univpm.SpringBootApp.model.Location;
+import it.univpm.SpringBootApp.model.Place;
 
 import java.util.ArrayList;
 
@@ -52,7 +54,41 @@ public class ParserJSON {
 	            a.settype((String) array.get("type"));
 	            a.setupdated_time((String) array.get("updated_time"));
 	            
-	            Albums.add(a);															//adding album to ArrayList of Album
+	            
+	            JSONObject placeArray = (JSONObject) array.get("place");
+	            ArrayList<Place> Places = new ArrayList<>();
+	            
+	            if (placeArray != null) {
+	            for (int j=0; j<placeArray.size(); j++) {
+	            	JSONObject jsonObj = (JSONObject) placeArray.get(j);
+	            	Place p = new Place();
+	            	
+	            	if (jsonObj != null) {
+	            	p.setname_place((String) jsonObj.get("name"));
+	            	p.setid_place((String) jsonObj.get("id"));
+	            	
+	            	JSONArray locArray = (JSONArray) jsonObj.get("location");
+	            	ArrayList<Location> Locations = new ArrayList<>();
+	            	
+	            	for (int k = 0; k < placeArray.size(); k++) {
+                        JSONObject jsonObject = (JSONObject) locArray.get(k);
+                        Location l = new Location();
+                        l.setcity_location((String) jsonObject.get("city"));
+                        l.setcountry_location((String) jsonObject.get("country"));
+                        l.setlatitude_location((double) jsonObject.get("latitude"));
+                        l.setlongitude_location((double) jsonObject.get("longitude"));
+                        l.setzip_location((String) jsonObject.get("zip"));
+                        Locations.add(l);
+	            	}
+	            	
+	            	p.setlocation_place(Locations);
+	            	}
+	            	Places.add(p);
+	            }
+	            }
+	            a.setplace(Places);
+	            
+	            Albums.add(a);																//adding album to ArrayList of Album
 	        }
 	        
 		} catch (FileNotFoundException e) {

@@ -9,16 +9,13 @@ package it.univpm.SpringBootApp.model;
 public class Data {
 	protected String id;
 	protected boolean can_upload;
-	protected int count;
-	protected String cover_photo;
+	protected long count;
 	protected String created_time;
 	protected String description;
 	protected String event;
-	protected String from;
 	protected String link;
 	protected String location;
 	protected String name;
-	protected String place;
 	protected String privacy;
 	protected String type;
 	protected String updated_time;
@@ -29,11 +26,9 @@ public class Data {
 * @param id;
 * @param can_upload;
 * @param count;
-* @param cover_photo;
 * @param created_time;
 * @param description;
 * @param event;
-* @param from;
 * @param link;
 * @param location;
 * @param name;
@@ -43,25 +38,29 @@ public class Data {
 * @param updated_time;
  */
 
-public Data(String id, boolean can_upload, int count, String cover_photo, String created_time,
-String description, String event, String from, String link, String location,
+public Data(String id, boolean can_upload, int count, String created_time,
+String description, String event, String link, String location,
 String name, String place, String privacy, String type, String updated_time) {
 	this.id=id;
 	this.can_upload=can_upload;
 	this.count=count;
-	this.cover_photo=cover_photo;
 	this.created_time=created_time;
 	this.description=description;
 	this.event=event;
-	this.from=from;
 	this.link=link;
 	this.location=location;
 	this.name=name;
-	this.place=place;
 	this.privacy=privacy;
 	this.type=type;
 	this.updated_time=updated_time;
 	}
+
+/**
+ * costruttore vuoto per la classe Data
+ */
+public Data() {
+	
+}
 
 /**
  * Metodo che restituisce id
@@ -86,17 +85,8 @@ public boolean getcan_upload() {
  * @return count
  */
 
-public int getcount() {
+public long getcount() {
 	return count;
-}
-
-/**
- * Metodo che restituisce cover_photo
- * @return cover_photo
- */
-
-public String getcover_photo() {
-	return cover_photo;
 }
 
 /**
@@ -127,15 +117,6 @@ public String getevent() {
 }
 
 /**
- * Metodo che restituisce from
- * @return from
- */
-
-public String getfrom() {
-	return from;
-}
-
-/**
  * Metodo che restituisce link
  * @return link
  */
@@ -162,14 +143,6 @@ public String getname() {
 	return name;
 }
 
-/**
- * Metodo che restituisce place
- * @return place
- */
-
-public String getplace() {
-	return place;
-}
 
 /**
  * Metodo che restituisce privacy
@@ -221,17 +194,8 @@ public void setcan_upload(boolean can_upload) {
  * @param count
  */
 
-public void setcount(int count) {
+public void setcount(long count) {
 	this.count = count;
-}
-
-/**
- * Metodo che imposta il valore di cover_photo
- * @param cover_photo
- */
-
-public void setcover_photo(String cover_photo) {
-	this.cover_photo = cover_photo;
 }
 
 /**
@@ -262,15 +226,6 @@ public void setevent(String event) {
 }
 
 /**
- * Metodo che imposta il valore di from
- * @param from
- */
-
-public void setfrom(String from) {
-	this.from = from;
-}
-
-/**
  * Metodo che imposta il valore di link
  * @param link
  */
@@ -295,15 +250,6 @@ public void setlocation(String location) {
 
 public void setname(String name) {
 	this.name = name;
-}
-
-/**
- * Metodo che imposta il valore di place
- * @param place
- */
-
-public void setplace(String place) {
-	this.place = place;
 }
 
 /**

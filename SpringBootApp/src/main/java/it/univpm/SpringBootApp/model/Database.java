@@ -24,15 +24,13 @@ public class Database {
 		arrMetadata.add(new Metadata("id", "string"));
 		arrMetadata.add(new Metadata("can_upload", "boolean"));
 		arrMetadata.add(new Metadata("count", "int"));
-		arrMetadata.add(new Metadata("cover_photo", "string"));
 		arrMetadata.add(new Metadata("created_time", "string"));
 		arrMetadata.add(new Metadata("description", "string"));
 		arrMetadata.add(new Metadata("event", "string"));
-		arrMetadata.add(new Metadata("from", "string"));
 		arrMetadata.add(new Metadata("link", "string"));
 		arrMetadata.add(new Metadata("location", "string"));
 		arrMetadata.add(new Metadata("name", "string"));
-		arrMetadata.add(new Metadata("place", "string"));
+		//arrMetadata.add(new Metadata("place", "string"));
 		arrMetadata.add(new Metadata("privacy", "string"));
 		arrMetadata.add(new Metadata("type", "string"));
 		arrMetadata.add(new Metadata("updated_time", "float"));

@@ -103,4 +103,9 @@ public class Location{
 	public void setzip_location(String zip_location) {
 		this.zip_location = zip_location;
 	}
+	
+	@Override
+	public String toString(){
+		return " CITY: " + getcity_location() + " COUNTRY: "+getcountry_location()+" LATITUDE: "+getlatitude_location() + " LONGITUDE: " +getlongitude_location()+ " ZIPCODE: " +getzip_location();
+	}
 }

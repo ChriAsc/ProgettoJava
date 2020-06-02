@@ -43,7 +43,7 @@ public class SpringBootAppApplication {
 	        
 	        for (int i = 0; i<albumArrayList.size(); i++) {
 	        	System.out.println(albumArrayList.get(i).getid() + " = ID " + albumArrayList.get(i).getlink() + " = LINK " + albumArrayList.get(i).getlocation() + " = LOCATION " + albumArrayList.get(i).getname() + " = NAME " + albumArrayList.get(i).getprivacy() + " = PRIVACY "
-	        			+ albumArrayList.get(i).gettype() + " = TYPE " + albumArrayList.get(i).getupdated_time() + " = UPDATED TIME ");
+	        			+ albumArrayList.get(i).gettype() + " = TYPE " + albumArrayList.get(i).getupdated_time() + " = UPDATED TIME " + albumArrayList.get(i).getplace());
 	        	
 	        }
 	        //SpringApplication.run(SpringBootAppApplication.class, args);

@@ -53,52 +53,39 @@ public class ParserJSON {
 	            a.setprivacy((String) array.get("privacy"));
 	            a.settype((String) array.get("type"));
 	            a.setupdated_time((String) array.get("updated_time"));
-
-	            /*
-	            JSONObject placeArray = (JSONObject) array.get("place");
 	            
-	            
-	            if (placeArray != null) {
-	            	ArrayList<Place> Places = new ArrayList<>();	
-	            for (int j=0; j<placeArray.size(); j++) {
-	            	
-	            	JSONObject jsonObj = (JSONObject) placeArray.get(j);
-	            	
+	            JSONObject places = (JSONObject) array.get("place");
+	            if(places != null) {
 	            	Place p = new Place();
-	            	if (jsonObj != null) {
+	            	String name = (String) places.get("name");
+	            	p.setname_place(name);
+	            	String id = (String) places.get("id");
+	            	p.setid_place(id);
 	            	
-	            	p.setname_place((String) jsonObj.get("name"));
-	            	p.setid_place((String) jsonObj.get("id"));
-	            	
-	            	JSONArray locArray = (JSONArray) jsonObj.get("location");
-	            	ArrayList<Location> Locations = new ArrayList<>();
-	            	
-	            	for (int k = 0; k < placeArray.size(); k++) {
-	            		
-                        JSONObject jsonObject = (JSONObject) locArray.get(k);
+	            	JSONObject locations = (JSONObject) places.get("location");
+	            	if(!locations.isEmpty()) {
+	            		            		
                         Location l = new Location();
-                        l.setcity_location((String) jsonObject.get("city"));
-                        l.setcountry_location((String) jsonObject.get("country"));
-                        l.setlatitude_location((double) jsonObject.get("latitude"));
-                        l.setlongitude_location((double) jsonObject.get("longitude"));
-                        l.setzip_location((String) jsonObject.get("zip"));
-                        Locations.add(l);
+                        String city = (String) locations.get("city");
+                        l.setcity_location(city);
+                        String country = (String) locations.get("country");
+                        l.setcountry_location(country);
+                        Object latitude = ((Object) locations.get("latitude"));
+                        l.setlatitude_location(((Number) latitude).doubleValue());
+                        Object longitude = ((Object) locations.get("longitude"));
+                        l.setlongitude_location(((Number) longitude).doubleValue());
+                        String zip = (String) locations.get("zip");
+                        l.setzip_location(zip);
                         
+	            	p.setlocation_place(l);
 	            	}
-	            	p.setlocation_place(Locations);
 	            	
+	            	a.setplace(p);
+	            }
 	            	
-	            }
-
-	            	Places.add(p);
-	            	
-	            }
-	            a.setplace(Places);
-	            }
-	           */
+	            
 	            Albums.add(a);																//adding album to ArrayList of Album
 	        }
-	        
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

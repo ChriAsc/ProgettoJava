@@ -1,15 +1,13 @@
 package it.univpm.SpringBootApp.model;
 
-import java.util.ArrayList;
-
 import it.univpm.SpringBootApp.model.Location;
 
 public class Place{
 	protected String name_place;
-	protected ArrayList<Location> location_place;
+	protected Location location_place;
 	protected String id_place;	
 	
-	public Place(String name_place, ArrayList<Location> location_place, String id_place) {
+	public Place(String name_place, Location location_place, String id_place) {
 				this.name_place=name_place;
 				this.location_place=location_place;
 				this.id_place=id_place;
@@ -31,7 +29,7 @@ public class Place{
 	 * Metodo che restituisce location_place
 	 * @return location_place
 	 */
-	public ArrayList<Location> getlocation_place() {
+	public Location getlocation_place() {
 		return location_place;
 	}
 	
@@ -57,7 +55,7 @@ public class Place{
 	 * @param location_place
 	 */
 
-	public void setlocation_place(ArrayList<Location> location_place) {
+	public void setlocation_place(Location location_place) {
 		this.location_place = location_place;
 	}
 	
@@ -70,4 +68,8 @@ public class Place{
 		this.id_place = id_place;
 	}
 	
+	@Override
+	public String toString() {
+		return " PLACEID: " + getid_place() + " "+getlocation_place()+" PLACENAME: "+getname_place();
+	}
 }

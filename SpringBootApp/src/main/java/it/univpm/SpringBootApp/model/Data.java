@@ -1,8 +1,8 @@
 package it.univpm.SpringBootApp.model;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-import it.univpm.SpringBootApp.model.Place;
+//import it.univpm.SpringBootApp.model.Place;
 
 /**
  * Classe che descrive Dati

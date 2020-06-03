@@ -86,6 +86,11 @@ public class Database {
 		arrData.addAll(d);
 	}
 
+	/**
+	 * Metodo che si occupa del riempimento di arrData 
+	 * sulla base dei valori scaricati ed estratti dal Parser
+	 * @param Data
+	 */
 	public void fillData() throws IOException {
 		File file = new File("dataFile.json");
         if(!file.exists()){

@@ -1,16 +1,23 @@
 package it.univpm.SpringBootApp.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.springframework.stereotype.Component;
+
 import it.univpm.SpringBootApp.model.Data;
-import it.univpm.SpringBootApp.model.Metadata;;
+import it.univpm.SpringBootApp.model.Metadata;
+import it.univpm.SpringBootApp.service.JSONGetAndDecode;
+import it.univpm.SpringBootApp.service.ParserJSON;;
 
 /**
  * Classe che forma Arraylist di Dati e Metadati
  * @author Cristian Cingolani & Christian Ascani
  *
  */
-
+@Component
 public class Database {
 	private ArrayList<Data> arrData = new ArrayList<Data>();
 	private ArrayList<Metadata> arrMetadata = new ArrayList<Metadata>();
@@ -18,9 +25,9 @@ public class Database {
 	
 	/**
 	* Costruttore della classe Database
-	 */
-	
-	public Database()
+	* @throws IOException 
+	*/
+	public Database() throws IOException
 	{
 		arrMetadata.add(new Metadata("id", "String"));
 		arrMetadata.add(new Metadata("can_upload", "boolean"));
@@ -47,7 +54,9 @@ public class Database {
 		arrMetadata.add(new Metadata("privacy", "String"));
 		arrMetadata.add(new Metadata("type", "String"));
 		arrMetadata.add(new Metadata("updated_time", "float"));
+
 		
+		fillData();
 		
 	}
 	
@@ -73,8 +82,21 @@ public class Database {
 	 * Metodo che inserisce in arrData un elemento di tipo Data
 	 * @param Data
 	 */
-	public void setArrData(Data d) {
-		arrData.add(d);
+	public void setArrData(ArrayList<Data> d) {
+		arrData.addAll(d);
 	}
 
+	public void fillData() throws IOException {
+		File file = new File("dataFile.json");
+        if(!file.exists()){
+			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAOSFtrCUP444ptZCAvpjx5ZC1WxEG6IOsOWqFCcN1YZBGkCEkLvZBUn3yKapIA5QCJQgKVBxdQhoHvfX4PyF0hf1003LdRWTfbZCZBLlM6y3dbo89ZAS7H9p5hXT9rwCWZBRQJlwpRjd5wA5HM3b3pgKCKc4CyZBIj3lysRmgKSmiciFinZAbsYQGyDkCuCkiwRNeRBE7xsSB5zaLvO7FLnZBlrAHTOkCYyaAZDZD");
+			try {
+				download.downloadJson(file.getName());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+        ParserJSON parseFile = new ParserJSON();
+        arrData = parseFile.parserJson(file.getName());
+	}
 }

@@ -19,7 +19,7 @@ import it.univpm.SpringBootApp.service.ParserJSON;;
  */
 @Component
 public class Database {
-	private ArrayList<Data> arrData = new ArrayList<Data>();
+	public ArrayList<Data> arrData = new ArrayList<Data>();
 	private ArrayList<Metadata> arrMetadata = new ArrayList<Metadata>();
 	
 	
@@ -31,7 +31,7 @@ public class Database {
 	{
 		arrMetadata.add(new Metadata("id", "String"));
 		arrMetadata.add(new Metadata("can_upload", "boolean"));
-		arrMetadata.add(new Metadata("count", "int"));
+		arrMetadata.add(new Metadata("count", "long"));
 		arrMetadata.add(new Metadata("created_time", "String"));
 		arrMetadata.add(new Metadata("description", "String"));
 		arrMetadata.add(new Metadata("event", "String"));
@@ -94,7 +94,7 @@ public class Database {
 	public void fillData() throws IOException {
 		File file = new File("dataFile.json");
         if(!file.exists()){
-			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAOSFtrCUP444ptZCAvpjx5ZC1WxEG6IOsOWqFCcN1YZBGkCEkLvZBUn3yKapIA5QCJQgKVBxdQhoHvfX4PyF0hf1003LdRWTfbZCZBLlM6y3dbo89ZAS7H9p5hXT9rwCWZBRQJlwpRjd5wA5HM3b3pgKCKc4CyZBIj3lysRmgKSmiciFinZAbsYQGyDkCuCkiwRNeRBE7xsSB5zaLvO7FLnZBlrAHTOkCYyaAZDZD");
+			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAJds8JgsXTOqjMK5GfTAZCZAhYZCfjWTfysAEmFa4qxEsjINhpxJvCbHzcRBCrAslQ5KZBgqoD7CZAqqhRp682cHyHLGjepKu5H7jZANZC0wclqAv29tGdrM1LXWJTXTWevnrzYac3KQhGfKDhjAt2ZAaFhdZBOTwIfj3b7Gbo9RAR63tevfqwtja9WSXzYRUgWBnLhuG3WwDYvtdfbOsEhCfv6URMcTBIAZDZD");
 			try {
 				download.downloadJson(file.getName());
 			} catch (JSONException e) {
@@ -104,4 +104,5 @@ public class Database {
         ParserJSON parseFile = new ParserJSON();
         arrData = parseFile.parserJson(file.getName());
 	}
+	
 }

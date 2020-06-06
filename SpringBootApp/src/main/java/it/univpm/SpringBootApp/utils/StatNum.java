@@ -12,11 +12,12 @@ import it.univpm.SpringBootApp.model.*;
 public class StatNum extends StatBase{
 	
 	private double sum;
-	private int count;
+	private long count;
 	private double avg;
     private double min;
     private double max;
     private double dev;
+    //public double[] arrStat = new double[5];
     
     /**
 	 * Costruttore della sottoclasse
@@ -27,7 +28,7 @@ public class StatNum extends StatBase{
     public StatNum(ArrayList<Data> arrD, String field) throws NoSuchMethodException {
     	super(arrD,field);
         this.count = arrD.size();
-        double[] values = new double[count];
+        double[] values = new double[(int)count];
         for (int i = 0; i < count ; i++){
             try {
                 Object doubleValue = m.invoke(arrD.get(i));
@@ -35,14 +36,15 @@ public class StatNum extends StatBase{
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
-            
+        
             //Richiamo alle funzioni che eseguono il calcolo delle statistiche
             setSum(values);
             setAvg(values);
             setMin(values);
             setMax(values);
             setDev(values);
-        }     
+            //loadStat();
+        }
     }
     
     /**
@@ -59,7 +61,7 @@ public class StatNum extends StatBase{
      * @return count
      */
     
-    public int getCount() {
+    public long getCount() {
         return count;
     }
     
@@ -115,7 +117,7 @@ public class StatNum extends StatBase{
      * @param count
      */
        
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
     
@@ -170,4 +172,15 @@ public class StatNum extends StatBase{
         }
         this.dev=((double) Math.pow(summ/count, 0.5));
     }
+    
+    /*
+    public void loadStat()
+    {
+    	arrStat[0]=getSum();
+    	arrStat[1]=getAvg();
+    	arrStat[2]=getMin();
+    	arrStat[3]=getMax();
+    	arrStat[4]=getDev();
+    }
+    */
 }

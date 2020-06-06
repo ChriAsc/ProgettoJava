@@ -1,5 +1,9 @@
 package it.univpm.SpringBootApp.model;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 //import java.util.ArrayList;
 
 //import it.univpm.SpringBootApp.model.Place;
@@ -10,7 +14,7 @@ package it.univpm.SpringBootApp.model;
  *
  */
 
-public class Data {
+public class Data{
 	protected String id;
 	protected boolean can_upload;
 	protected long count;
@@ -43,7 +47,7 @@ public class Data {
 * @param updated_time;
  */
 
-public Data(String id, boolean can_upload, int count, String created_time,
+public Data(String id, boolean can_upload, long count, String created_time,
 String description, String event, String link, String location,
 String name, Place place, String privacy, String type, String updated_time) {
 	this.id=id;

@@ -2,6 +2,10 @@ package it.univpm.SpringBootApp.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import it.univpm.SpringBootApp.model.*;
 
 /**
@@ -9,107 +13,22 @@ import it.univpm.SpringBootApp.model.*;
  * @author Cingolani Cristian & Ascani Christian
  */
 
-public class StatNum extends StatBase{
+public class StatNum{
 	
-	private double sum;
-	private long count;
-	private double avg;
-    private double min;
-    private double max;
-    private double dev;
-    //public double[] arrStat = new double[5];
-    
-    /**
-	 * Costruttore della sottoclasse
-	 * @param arrD
-	 * @param field
-	 */
-    
-    public StatNum(ArrayList<Data> arrD, String field) throws NoSuchMethodException {
-    	super(arrD,field);
-        this.count = arrD.size();
-        double[] values = new double[(int)count];
-        for (int i = 0; i < count ; i++){
-            try {
-                Object doubleValue = m.invoke(arrD.get(i));
-                values[i] = (double) doubleValue;
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        
-            //Richiamo alle funzioni che eseguono il calcolo delle statistiche
-            setSum(values);
-            setAvg(values);
-            setMin(values);
-            setMax(values);
-            setDev(values);
-            //loadStat();
-        }
-    }
-    
-    /**
-     * Metodo che restituisce sum
-     * @return sum
-     */
-    
-    public double getSum() {
-        return sum;
-    }
-
-    /**
-     * Metodo che restituisce count
-     * @return count
-     */
-    
-    public long getCount() {
-        return count;
-    }
-    
-    /**
-     * Metodo che restituisce avg
-     * @return avg
-     */
-    
-    public double getAvg() {
-        return avg;
-    }
-    
-    /**
-     * Metodo che restituisce min
-     * @return min
-     */
-    
-    public double getMin() {
-        return min;
-    }
-    
-    /**
-     * Metodo che restituisce max
-     * @return max
-     */
-    
-    public double getMax() {
-        return max;
-    }
-    
-    /**
-     * Metodo che restituisce dev
-     * @return dev
-     */
-    
-    public double getDev() {
-        return dev;
-    }    
-    
+	public StatNum() {
+		
+	}
+	
     /**
      * Metodo che calcola e imposta il valore di sum
      * @param values
      */
-
-    private void setSum(double[] values) {
-        for (double v : values){
-            sum += v;
+    private static double setSum(ArrayList<Number> values) {
+        double sum = 0;
+    	for (Number v : values){
+            sum += v.doubleValue();
         }
+        return sum;
     }
     
     /**
@@ -117,8 +36,8 @@ public class StatNum extends StatBase{
      * @param count
      */
        
-    public void setCount(long count) {
-        this.count = count;
+    public static int setCount(ArrayList count) {
+        return count.size();
     }
     
     /**
@@ -126,8 +45,10 @@ public class StatNum extends StatBase{
      * @param avg
      */
     
-    private void setAvg(double[] values) {
-        this.avg=(sum/count);
+    private static double setAvg(ArrayList<Number> values) {
+        double avg = 0;
+        avg = setSum(values)/setCount(values);
+    	return avg;
     }
     
     /**
@@ -135,14 +56,14 @@ public class StatNum extends StatBase{
      * @param values
      */
 
-    private void setMin(double[] values) {
-        double min = values[0];
-        for ( int i = 1; i < values.length ; i++){
-            if(values[i] < min){
-                min = values[i];
+    private static double setMin(ArrayList<Number> values) {
+    	double min = values.get(0).doubleValue();
+    	for(Number n : values) {
+    		if(n.doubleValue() < min) {
+                min = n.doubleValue();
             }
         }
-        this.min=min;
+    	return min;
     }
     
     /**
@@ -150,14 +71,15 @@ public class StatNum extends StatBase{
      * @param max
      */
 
-    private void setMax(double[] values) {
-        double max = values[0];
-        for ( int i = 1; i < values.length ; i++){
-            if(values[i] > max){
-                max = values[i];
+    private static double setMax(ArrayList<Number> values) {
+        double max = values.get(0).doubleValue();
+        for(Number n : values) {
+    		if(n.doubleValue() > max) {
+                max = n.doubleValue();
             }
         }
-        this.max=max;
+
+    	return max;
     }
     
     /**
@@ -165,22 +87,86 @@ public class StatNum extends StatBase{
      * @param dev
      */
 
-    private void setDev(double[] values) {
-        double summ = 0;
-        for (double v : values) {
-            summ += Math.pow(v - avg, 2);
-        }
-        this.dev=((double) Math.pow(summ/count, 0.5));
+    private static double setDev(ArrayList<Number> values) {
+    	double s=0;
+    	for(Number numero : values) {
+    		s += Math.pow(numero.doubleValue() - setAvg(values), 2);
+    	}
+        s=((double) Math.pow(s/setCount(values), 0.5));
+        return s;
     }
+
+    /**
+	 * Questo metodo conta le occorrenze di un elemento all'interno di una lista
+	 * 
+	 * @param lista contiene i valori per i quali si vogliono calcolare le occorrenze
+	 * @return restituisce una map chiave-valore dove le chiavi sono gli elementi della lista e i valori le corrispondenti occorrenze
+	 */
+	public static Map<Object, Integer> getUniqueElement(ArrayList<Object> lista) {
+		Map<Object,Integer> mappa = new HashMap<>();  //creazione della mappa
+		for(Object obj : lista) {  //scorre la lista
+			if(mappa.containsKey(obj))  //controlla se la chiave esiste giï¿½
+				mappa.replace(obj, mappa.get(obj) + 1);  //se esiste aumenta il suo valore di 1
+			else
+				mappa.put(obj, 1);  //se non esiste la crea e le assegna il valore 1
+		}
+		return mappa;
+	}
+	
+	/**
+	 * Metodo che restituisce una mappa nella quale vengono visualizzate tutte le statistiche non numeriche di una lista 
+	 * 
+	 * @param lista,  lista che fornisce i valori con i quali si possono calcolare tutte le statistiche non numeriche
+	 * @return map che contiene come chiavi il nome della statistica e come valore quello calcolato tramite i metodi della classe
+	 */
+	public static Map<String, Object> StrStat(String campo, ArrayList<Object> lista) {
+		Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche non numeriche
+		maps.put("field", campo);
+		maps.put("count", setCount(lista));
+		maps.put("elementi unici", getUniqueElement(lista));
+	    return maps;
+	}
     
-    /*
-    public void loadStat()
-    {
-    	arrStat[0]=getSum();
-    	arrStat[1]=getAvg();
-    	arrStat[2]=getMin();
-    	arrStat[3]=getMax();
-    	arrStat[4]=getDev();
+    /**
+     * Metodo che restituisce una mappa nella quale vengono visualizzate tutte le statistiche numeriche di una lista 
+     * 
+     * @param numLista  lista che fornisce i valori con i quali si possono calcolare tutte le statistiche
+     * @return map che contiene come chiavi il nome della statistica e come valore quello calcolato tramite i metodi della classe
+     */
+    public static Map<String, Object> NumStat(String campo, ArrayList<Number> numLista) {
+    	Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
+    	maps.put("field", campo);
+    	maps.put("count", setCount(numLista));
+    	maps.put("sum", setSum(numLista));
+    	maps.put("avg", setAvg(numLista));
+        maps.put("min", setMin(numLista));
+        maps.put("max", setMax(numLista));
+        maps.put("dev", setDev(numLista));
+        return maps;
     }
-    */
+	
+	/**
+	 * Metodo che serve a visualizzare il tipo di statistiche in base al campo specificato
+	 * 
+	 * @param campo contiene il nome dell'attributo del quale si vogliono si vogliono calcolare le statistiche 
+	 * @param lista contiene la lista dei valori utili per il calcolo delle statistiche
+	 * @return maps, mappa delle statistiche
+	 */
+    public Map<String, Object> getStat(String campo, ArrayList<Object> lista) {
+		Map<String, Object> maps = new HashMap<>();
+		if(!lista.isEmpty()) {
+			 // se il primo valore e' un numero crea una lista di numeri e gli passa i valori della lista castati a Number
+			if (lista.get(0) instanceof Number) { 
+				ArrayList<Number> numLista = new ArrayList<>();
+				for (Object elem : lista) {
+					numLista.add(((Number) elem));
+				}
+				maps = NumStat(campo, numLista); // calcola le statistiche numeriche
+			} else {
+				maps = StrStat(campo, lista);
+			}
+		}
+		return maps;
+	}
+
 }

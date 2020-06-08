@@ -14,7 +14,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
  *
  */
 
-public class Data{
+@SuppressWarnings("serial")
+public class Data implements Serializable{
 	protected String id;
 	protected boolean can_upload;
 	protected long count;
@@ -50,6 +51,7 @@ public class Data{
 public Data(String id, boolean can_upload, long count, String created_time,
 String description, String event, String link, String location,
 String name, Place place, String privacy, String type, String updated_time) {
+	super();
 	this.id=id;
 	this.can_upload=can_upload;
 	this.count=count;

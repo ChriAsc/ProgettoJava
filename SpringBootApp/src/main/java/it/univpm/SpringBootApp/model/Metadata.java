@@ -28,7 +28,6 @@ public class Metadata {
 	public String getspec() {
 		return spec;
 	}
-	
 	/**
 	 * Metodo che restituisce type
 	 * @return type

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.lang.reflect.Field; 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
 
 import org.json.JSONException;
 import org.springframework.stereotype.Component;
@@ -35,13 +36,14 @@ public class Database{
 	* Costruttore della classe Database
 	* @throws IOException 
 	 *@throws NoSuchMethodException 
+	 * @throws ParseException 
 	*/
-	public Database() throws IOException, NoSuchMethodException
+	public Database() throws IOException, NoSuchMethodException, ParseException
 	{
 		arrMetadata.add(new Metadata("id", "String"));
 		arrMetadata.add(new Metadata("can_upload", "boolean"));
 		arrMetadata.add(new Metadata("count", "int"));
-		arrMetadata.add(new Metadata("created_time", "String"));
+		arrMetadata.add(new Metadata("created_time", "SimpleDateFormat"));
 		arrMetadata.add(new Metadata("description", "String"));
 		arrMetadata.add(new Metadata("event", "String"));
 		arrMetadata.add(new Metadata("link", "String"));
@@ -60,7 +62,7 @@ public class Database{
 		
 		arrMetadata.add(new Metadata("privacy", "String"));
 		arrMetadata.add(new Metadata("type", "String"));
-		arrMetadata.add(new Metadata("updated_time", "String"));
+		arrMetadata.add(new Metadata("updated_time", "SimpleDateFormat"));
 		fillData();
 	}
 	
@@ -94,8 +96,9 @@ public class Database{
 	 * Metodo che si occupa del riempimento di arrData 
 	 * sulla base dei valori scaricati ed estratti dal Parser
 	 * @param Data
+	 * @throws ParseException 
 	 */
-	public void fillData() throws IOException {
+	public void fillData() throws IOException, ParseException {
 		File file = new File("dataFile.json");
         if(!file.exists()){
 			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAA7yL5kra2QyIEUC7rpC437HYxdkRGkYC3PShN5ZAXAoAuiiY09Jban0x8DQWmMDNEwbkU13wFSuxLvmYCvnbZALkXRTZC6eqAAP0X5E3eWI0UJTUdS9oz9BZBznhf1Qimag1R0JygvqWHapZAYOmFmcFEvgIBOh0nkQdQmxy6ZCWQI8anhLMgc5G2xRcuZAZCEZCz4rZCIVLxQe8IpMAjhnywIZAxCAdC8HwZDZD");

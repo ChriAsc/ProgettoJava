@@ -15,55 +15,112 @@ import it.univpm.SpringBootApp.model.*;
 
 public class StatNum{
 	
+	private double sum;
+	private int count;
+	private double avg;
+    private double min;
+    private double max;
+    private double dev;
+    
+	
 	public StatNum() {
 		
 	}
+	
+	/**
+     * Metodo che restituisce sum
+     * @return sum
+     */
+    
+    public double getSum() {
+        return sum;
+    }
+
+    /**
+     * Metodo che restituisce count
+     * @return count
+     */
+    
+    public int getCount() {
+        return count;
+    }
+    
+    /**
+     * Metodo che restituisce avg
+     * @return avg
+     */
+    
+    public double getAvg() {
+        return avg;
+    }
+    
+    /**
+     * Metodo che restituisce min
+     * @return min
+     */
+    
+    public double getMin() {
+        return min;
+    }
+    
+    /**
+     * Metodo che restituisce max
+     * @return max
+     */
+    
+    public double getMax() {
+        return max;
+    }
+    
+    /**
+     * Metodo che restituisce dev
+     * @return dev
+     */
+    
+    public double getDev() {
+        return dev;
+    }    
 	
     /**
      * Metodo che calcola e imposta il valore di sum
      * @param values
      */
-    private static double setSum(ArrayList<Number> values) {
-        double sum = 0;
+    private void setSum(ArrayList<Number> values) {
     	for (Number v : values){
             sum += v.doubleValue();
         }
-        return sum;
-    }
+    }    
     
     /**
-     * Metodo che imposta il valore di count
-     * @param count
+     * Metodo che calcola e imposta il valore di count
+     * @param values
      */
-       
-    public static int setCount(ArrayList count) {
-        return count.size();
+    private void setCount(ArrayList values) {
+    	count= values.size();
     }
+      
     
     /**
      * Metodo che calcola e imposta il valore di avg
      * @param avg
      */
     
-    private static double setAvg(ArrayList<Number> values) {
-        double avg = 0;
-        avg = setSum(values)/setCount(values);
-    	return avg;
+    private void setAvg(ArrayList<Number> values) {
+        avg = getSum()/getCount();
     }
     
     /**
-     * Metodo che calcola e imposta il valore di can_upload
+     * Metodo che calcola e imposta il valore di min
      * @param values
      */
 
-    private static double setMin(ArrayList<Number> values) {
-    	double min = values.get(0).doubleValue();
+    private void setMin(ArrayList<Number> values) {
+    	min = values.get(0).doubleValue();
     	for(Number n : values) {
     		if(n.doubleValue() < min) {
                 min = n.doubleValue();
             }
         }
-    	return min;
     }
     
     /**
@@ -71,15 +128,13 @@ public class StatNum{
      * @param max
      */
 
-    private static double setMax(ArrayList<Number> values) {
-        double max = values.get(0).doubleValue();
+    private void setMax(ArrayList<Number> values) {
+        max = values.get(0).doubleValue();
         for(Number n : values) {
     		if(n.doubleValue() > max) {
                 max = n.doubleValue();
             }
         }
-
-    	return max;
     }
     
     /**
@@ -87,13 +142,12 @@ public class StatNum{
      * @param dev
      */
 
-    private static double setDev(ArrayList<Number> values) {
-    	double s=0;
+    private void setDev(ArrayList<Number> values) {
+    	dev = 0;
     	for(Number numero : values) {
-    		s += Math.pow(numero.doubleValue() - setAvg(values), 2);
+    		dev += Math.pow(numero.doubleValue() - getAvg(), 2);
     	}
-        s=((double) Math.pow(s/setCount(values), 0.5));
-        return s;
+        dev=((double) Math.pow(dev/getCount(), 0.5));
     }
 
     /**
@@ -119,10 +173,11 @@ public class StatNum{
 	 * @param lista,  lista che fornisce i valori con i quali si possono calcolare tutte le statistiche non numeriche
 	 * @return map che contiene come chiavi il nome della statistica e come valore quello calcolato tramite i metodi della classe
 	 */
-	public static Map<String, Object> StrStat(String campo, ArrayList<Object> lista) {
+	public Map<String, Object> StrStat(String campo, ArrayList<Object> lista) {
 		Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche non numeriche
+		setCount(lista);
 		maps.put("field", campo);
-		maps.put("count", setCount(lista));
+		maps.put("count", getCount());
 		maps.put("elementi unici", getUniqueElement(lista));
 	    return maps;
 	}
@@ -133,15 +188,21 @@ public class StatNum{
      * @param numLista  lista che fornisce i valori con i quali si possono calcolare tutte le statistiche
      * @return map che contiene come chiavi il nome della statistica e come valore quello calcolato tramite i metodi della classe
      */
-    public static Map<String, Object> NumStat(String campo, ArrayList<Number> numLista) {
+    public Map<String, Object> NumStat(String campo, ArrayList<Number> numLista) {
     	Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
+    	setCount(numLista);
+    	setSum(numLista);
+    	setAvg(numLista);
+    	setMin(numLista);
+    	setMax(numLista);
+    	setDev(numLista);
     	maps.put("field", campo);
-    	maps.put("count", setCount(numLista));
-    	maps.put("sum", setSum(numLista));
-    	maps.put("avg", setAvg(numLista));
-        maps.put("min", setMin(numLista));
-        maps.put("max", setMax(numLista));
-        maps.put("dev", setDev(numLista));
+    	maps.put("count", getCount());
+    	maps.put("sum", getSum());
+    	maps.put("avg", getAvg());
+        maps.put("min", getMin());
+        maps.put("max", getMax());
+        maps.put("dev", getDev());
         return maps;
     }
 	

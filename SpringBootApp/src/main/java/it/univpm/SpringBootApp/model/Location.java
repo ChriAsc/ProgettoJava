@@ -106,6 +106,6 @@ public class Location{
 	
 	@Override
 	public String toString(){
-		return " CITY: " + getcity_location() + " COUNTRY: "+getcountry_location()+" LATITUDE: "+getlatitude_location() + " LONGITUDE: " +getlongitude_location()+ " ZIPCODE: " +getzip_location();
+		return " " + getcity_location() + " "+getcountry_location() + " " + getlatitude_location() + " " + getlongitude_location() + " " + getzip_location();
 	}
 }

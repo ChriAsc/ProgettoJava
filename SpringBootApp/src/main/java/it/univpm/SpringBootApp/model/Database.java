@@ -51,16 +51,15 @@ public class Database{
 		arrMetadata.add(new Metadata("name_place", "String"));
 		arrMetadata.add(new Metadata("location_place", "Location"));
 		arrMetadata.add(new Metadata("id_place", "string"));
-		
 		arrMetadata.add(new Metadata("city_location", "String"));
 		arrMetadata.add(new Metadata("country_location", "String"));
 		arrMetadata.add(new Metadata("latitude_location", "double"));
 		arrMetadata.add(new Metadata("longitude_location", "double"));
 		arrMetadata.add(new Metadata("zip_location", "String"));
-		
 		arrMetadata.add(new Metadata("privacy", "String"));
 		arrMetadata.add(new Metadata("type", "String"));
 		arrMetadata.add(new Metadata("updated_time", "String"));
+		
 		fillData();
 	}
 	

@@ -12,32 +12,37 @@ import java.util.Map;
 import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Database;
 
+/**
+ * Classe che contiene metodi utili 
+ * per il calcolo delle varie statistiche
+ * @author Cingolani Cristian & Ascani Christian
+ */
 public class StatBase {
 
-public StatBase(){
+	/**
+	 * Costruttore base di StatBase
+	 */
+    public StatBase(){
 		
 	}
+
 	/**
-	 * Questo metodo gestisce le statistiche, verificando se l'attributo passato è di tipo numerico o string
-	 * verifica se l'attributo è presente
-	 * grazie all'uso del metodo equalsIgnoreCase è possibile inserire nella richiesta dell'attributo 
-	 * sia lettere maiscole che minuscole
-	 * senza creare errori riguardanti il Case
+	 * Questo metodo prende in ingresso il nome del campo field passato
+	 * verifica se la mappa viene riempita
+	 * ed in caso contrario ritorna un messaggio di errore
 	 * @param nomeCampo
-	 * @return mappa delle statistiche 
+	 * @return mappa 
 	 * @throws NoSuchMethodException 
 	 * @throws ParseException 
 	 * @throws IOException 
 	 */
 	public Map<String, Object> getStatistiche(String nomeCampo) throws NoSuchMethodException, IOException, ParseException 
 	{
-		//StatNum statistica = new StatNum();
 		Database db = new Database();
 		Map<String, Object> mappa = new HashMap<>();
 		Map<String, Object> Errore = new HashMap<>();
-		Errore.put("WARNING", "NON VI SONO STATISTICHE SULL'ATTRIBUTO INSERITO");
-		Field[] fields = Data.class.getDeclaredFields();
-		
+		Errore.put("Error", "It's not possible to apply a statistic to this field!");
+		Field[] fields = Data.class.getDeclaredFields();		
 		for (Field f : fields) 
 		{
 			if(nomeCampo.equalsIgnoreCase(f.getName())) 
@@ -50,23 +55,23 @@ public StatBase(){
 	}
 	
 	/**
-	 * Questo metodo estrae i valori di un determinato campo, passato tramite fieldName 
-	 * verifica se è presente nel vettore dei campi e se risulta TRUE aggiunge il valore dell'oggetto della lista
-	 * @param fieldName nome del campo del file JSON
-	 * @param list lista che si ottiene dopo aver effettuato il parsing, array di oggetti Data
-	 * @return la lista che contiene i valori di un determinato campo
+	 * Questo metodo prende in ingresso il campo fieldName passato
+	 * verifica che questo campo rientri tra quelli possibili
+	 * e lo aggiunge all'arraylist values
+	 * @param fieldName 
+	 * @param list 
+	 * @return values
 	 */
 	public ArrayList<Object> fieldValues(String fieldName, ArrayList<Data> list) {
 		ArrayList<Object> values = new ArrayList<>();
 		try {
 			Field[] fields = Data.class.getDeclaredFields();
-			for(Object e : list) {
-				// controlla se è presente l'attributo  
+			for(Object e : list) { 
 				for(int i=0; i < fields.length; i++) {
 					if(fieldName.equalsIgnoreCase(fields[i].getName())) {
 						Method m = e.getClass().getMethod("get"+fields[i].getName());
 						Object val = m.invoke(e);
-						values.add(val); //lo aggiunge alla lista
+						values.add(val); 
 					}
 				}
 			}
@@ -93,36 +98,34 @@ public StatBase(){
 	 */
     public Map<String, Object> getStat(String campo, ArrayList<Object> lista) {
 		Map<String, Object> maps = new HashMap<>();
-		StatNum statistica = new StatNum();
-		StatStr statisticaS = new StatStr();
+		StatNum statN = new StatNum();
+		StatStr statS = new StatStr();
 		if(!lista.isEmpty()) {
-			 // se il primo valore e' un numero crea una lista di numeri e gli passa i valori della lista castati a Number
 			if (lista.get(0) instanceof Number) { 
 				ArrayList<Number> numLista = new ArrayList<>();
 				for (Object elem : lista) {
 					numLista.add(((Number) elem));
 				}
-				maps = statistica.NumStat(campo, numLista); // calcola le statistiche numeriche
+				maps = statN.NumStat(campo, numLista);
 			} else {
-				maps = statisticaS.StrStat(campo, lista);
+				maps = statS.StrStat(campo, lista);
 			}
 		}
 		return maps;
 	}
     
     /**
-	 * Questo metodo conta le occorrenze di un elemento all'interno di una lista
-	 * 
-	 * @param lista contiene i valori per i quali si vogliono calcolare le occorrenze
-	 * @return restituisce una map chiave-valore dove le chiavi sono gli elementi della lista e i valori le corrispondenti occorrenze
+	 * Questo metodo che conta le volte in cui i valori di lista si ripetono
+	 * @param lista 
+	 * @return mappa
 	 */
 	public static Map<Object, Integer> getUniqueElement(ArrayList<Object> lista) {
-		Map<Object,Integer> mappa = new HashMap<>();  //creazione della mappa
-		for(Object obj : lista) {  //scorre la lista
-			if(mappa.containsKey(obj))  //controlla se la chiave esiste giï¿½
-				mappa.replace(obj, mappa.get(obj) + 1);  //se esiste aumenta il suo valore di 1
+		Map<Object,Integer> mappa = new HashMap<>();  
+		for(Object obj : lista) { 
+			if(mappa.containsKey(obj))  
+				mappa.replace(obj, mappa.get(obj) + 1); 
 			else
-				mappa.put(obj, 1);  //se non esiste la crea e le assegna il valore 1
+				mappa.put(obj, 1);  
 		}
 		return mappa;
 	}

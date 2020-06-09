@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.univpm.SpringBootApp.model.*;
-
 /**
  * Sottoclasse per calcolo statistiche di tipo numerico
  * @author Cingolani Cristian & Ascani Christian
@@ -21,7 +19,9 @@ public class StatNum extends StatBase{
     private double max;
     private double dev;
     
-	
+    /**
+	 * Costruttore base di StatNum
+	 */
 	public StatNum() {
 		
 	}
@@ -29,8 +29,7 @@ public class StatNum extends StatBase{
 	/**
      * Metodo che restituisce sum
      * @return sum
-     */
-    
+     */ 
     public double getSum() {
         return sum;
     }
@@ -38,8 +37,7 @@ public class StatNum extends StatBase{
     /**
      * Metodo che restituisce count
      * @return count
-     */
-    
+     */   
     public int getCount() {
         return count;
     }
@@ -47,8 +45,7 @@ public class StatNum extends StatBase{
     /**
      * Metodo che restituisce avg
      * @return avg
-     */
-    
+     */   
     public double getAvg() {
         return avg;
     }
@@ -56,8 +53,7 @@ public class StatNum extends StatBase{
     /**
      * Metodo che restituisce min
      * @return min
-     */
-    
+     */    
     public double getMin() {
         return min;
     }
@@ -65,8 +61,7 @@ public class StatNum extends StatBase{
     /**
      * Metodo che restituisce max
      * @return max
-     */
-    
+     */    
     public double getMax() {
         return max;
     }
@@ -74,8 +69,7 @@ public class StatNum extends StatBase{
     /**
      * Metodo che restituisce dev
      * @return dev
-     */
-    
+     */   
     public double getDev() {
         return dev;
     }    
@@ -96,14 +90,12 @@ public class StatNum extends StatBase{
      */
     protected void setCount(ArrayList values) {
     	count= values.size();
-    }
-      
+    }      
     
     /**
      * Metodo che calcola e imposta il valore di avg
      * @param avg
-     */
-    
+     */  
     private void setAvg(ArrayList<Number> values) {
         avg = getSum()/getCount();
     }
@@ -112,7 +104,6 @@ public class StatNum extends StatBase{
      * Metodo che calcola e imposta il valore di min
      * @param values
      */
-
     private void setMin(ArrayList<Number> values) {
     	min = values.get(0).doubleValue();
     	for(Number n : values) {
@@ -126,7 +117,6 @@ public class StatNum extends StatBase{
      * Metodo che calcola e imposta il valore di max
      * @param max
      */
-
     private void setMax(ArrayList<Number> values) {
         max = values.get(0).doubleValue();
         for(Number n : values) {
@@ -140,7 +130,6 @@ public class StatNum extends StatBase{
      * Metodo che calcola e imposta il valore di dev
      * @param dev
      */
-
     private void setDev(ArrayList<Number> values) {
     	dev = 0;
     	for(Number numero : values) {
@@ -148,23 +137,23 @@ public class StatNum extends StatBase{
     	}
         dev=((double) Math.pow(dev/getCount(), 0.5));
     }
-	
-	
+		
     /**
-     * Metodo che restituisce una mappa nella quale vengono visualizzate tutte le statistiche numeriche di una lista 
-     * 
-     * @param numLista  lista che fornisce i valori con i quali si possono calcolare tutte le statistiche
-     * @return map che contiene come chiavi il nome della statistica e come valore quello calcolato tramite i metodi della classe
+     * Metodo che riceve in ingresso un particolare field ed un arraylist di number
+     * restituisce una mappa con tutte le statistiche di tipo numerico
+     * @param field
+     * @param numLista
+     * @return maps
      */
-    public Map<String, Object> NumStat(String campo, ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
+    public Map<String, Object> NumStat(String field, ArrayList<Number> numLista) {
+    	Map<String, Object> maps = new HashMap<>(); 
     	setCount(numLista);
     	setSum(numLista);
     	setAvg(numLista);
     	setMin(numLista);
     	setMax(numLista);
     	setDev(numLista);
-    	maps.put("field", campo);
+    	maps.put("field", field);
     	maps.put("count", getCount());
     	maps.put("sum", getSum());
     	maps.put("avg", getAvg());
@@ -173,15 +162,14 @@ public class StatNum extends StatBase{
         maps.put("dev", getDev());
         return maps;
     }
-	
-	
-    
+	 
     /**
-	 * Metodo che restituisce una mappa nella quale vengono visualizzate le statistiche
-	 *  
+	 * Metodo che riceve in ingresso un arraylist di number
+	 * @param numLista 
+	 * @return maps
 	 * */
     public Map<String, Object> NumStatData(ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new LinkedHashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
+    	Map<String, Object> maps = new LinkedHashMap<>();  
     	setCount(numLista);
     	setSum(numLista);
     	setAvg(numLista);
@@ -196,13 +184,19 @@ public class StatNum extends StatBase{
         return maps;
     }
     
+    /**
+	 * Metodo che riceve in ingresso un arraylist di number
+	 * calcola il numero di album pubblicati in ciascun anno (dal 2010 al 2020)
+	 * restituisce una map con tutti gli anni(chiave) e con le relative occorrenze(valore)
+	 * @param numLista 
+	 * @return maps
+	 * */
     public Map<String, Object> StatIstoYear(ArrayList<Number> numLista) {
     	Map<String, Object> maps = new LinkedHashMap<>();
     	int[] years = new int[11];
     	for(int i=0; i < 11; i++) {
     		years[i]=0;
-    	}
-    	
+    	}   	
     	for(int i=0; i < numLista.size(); i++) {
     		for(int j=2010; j < 2021; j++) {
     			if(numLista.get(i).intValue()+1900==j) years[j-2010]++;
@@ -222,13 +216,19 @@ public class StatNum extends StatBase{
     	return maps;	
     }
     
+    /**
+	 * Metodo che riceve in ingresso un arraylist di number
+	 * calcola il numero di album pubblicati in ciascun mese
+	 * restituisce una map con tutti i mesi(chiave) e con le relative occorrenze(valore)
+	 * @param numLista 
+	 * @return maps
+	 * */
     public Map<String, Object> StatIstoMonth(ArrayList<Number> numLista) {
     	Map<String, Object> maps = new LinkedHashMap<>();
     	int[] months = new int[12];
     	for(int i=0; i < 12; i++) {
     		months[i]=0;
-    	}
-    	
+    	}   	
     	for(int i=0; i < numLista.size(); i++) {
     		for(int j=1; j < 13; j++) {
     			if(numLista.get(i).intValue()==j) months[j-1]++;
@@ -249,8 +249,13 @@ public class StatNum extends StatBase{
     	return maps;	
     }
     
-    
-    
+    /**
+	 * Metodo che riceve in ingresso un arraylist di number
+	 * calcola il numero di album pubblicati in ciascun giorno
+	 * restituisce una map con tutti i giorni(chiave) e con le relative occorrenze(valore)
+	 * @param numLista 
+	 * @return maps
+	 * */   
     public Map<String, Object> StatIstoDay(ArrayList<Number> numLista) {
     	Map<String, Object> maps = new LinkedHashMap<>();
     	int[] days = new int[31];
@@ -294,10 +299,7 @@ public class StatNum extends StatBase{
     	maps.put("29",days[28]);
     	maps.put("30",days[29]);
     	maps.put("31",days[30]);
-    	
- 
     	return maps;	
     }
-    
-
+   
 }

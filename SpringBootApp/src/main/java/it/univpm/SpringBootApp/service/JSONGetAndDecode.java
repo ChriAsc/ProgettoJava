@@ -34,10 +34,9 @@ public class JSONGetAndDecode {
 		
 		public void downloadJson (String filename) {
 			
-			DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);					//get the date format
+			DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);					
 			Date date = null;
-			
-			
+						
 			try {
 				
 				URLConnection openConnection = (url).openConnection();
@@ -57,45 +56,34 @@ public class JSONGetAndDecode {
 				   }
 				 } finally {
 				   in.close();
-				 }
-				 
+				 }				 
 
 				 System.out.println("Data read correctly!");
 				 System.out.println("Parsing the json...");
-				 
-				//System.out.println( data );
 				
-				JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	 		//parse JSON Object
-				//JSONArray objArr = (JSONArray) obj.get("data");	                     		//parse JSON Array
+				JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	 		//parse JSON Object                     		//parse JSON Array
 				System.out.println("JSON parsed!");
 				System.out.println("Starting download file JSON...");
-				
-				
-				try (FileWriter file = new FileWriter(filename)) {
-					
+								
+				try (FileWriter file = new FileWriter(filename)) {					
 					file.write(obj.toJSONString());
 					file.flush();
-					System.out.println("Download completed!");
-					 
+					System.out.println("Download completed!");					 
 				 } 
 				catch (FileAlreadyExistsException e) 	         							//this exception is thrown when the file already exists
-				{
-					
+				{					
 					File dataFile = new File(filename);
 					String fileDataString =	dateFormat.format(dataFile.lastModified());		//get the data of the last edit of the file
-					Date fileData = null;
-					
+					Date fileData = null;					
 					try {
 						fileData = dateFormat.parse(fileDataString);                        //convert the data of the file into date type
 					} catch (java.text.ParseException ex) {
 						ex.printStackTrace();
 					}
-
 					if(fileData.compareTo(date)<0)			//.compareTo method returns the value 0 if the argument date is equal to this Date; a value less than 0 if this Date is before the date argument; and a value greater than 0 if this Date is after the Date argument
 						System.out.println("The data file already exists | Last edit: " + fileDataString);
 					else
-					{
-						
+					{						
 						if (dataFile.delete())	{											//the old data file is deleted and then the new data is downloaded
 							try (FileWriter file = new FileWriter(filename)) {
 								file.write(obj.toJSONString());
@@ -103,14 +91,12 @@ public class JSONGetAndDecode {
 								System.out.println("Download completed!");
 							} catch (Exception e1) {
 								e1.printStackTrace();
-							}
-							
+							}							
 							} else
 							{
 								System.out.println("Unable to delete the older " + filename);
 							}
-					}
-					
+					}					
 				} catch (IOException e) {
 					 e.printStackTrace();
 				 }

@@ -2,24 +2,16 @@ package it.univpm.SpringBootApp.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.lang.reflect.Field; 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.text.ParseException;
 
 import org.json.JSONException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Metadata;
 import it.univpm.SpringBootApp.service.JSONGetAndDecode;
 import it.univpm.SpringBootApp.service.ParserJSON;
-import it.univpm.SpringBootApp.utils.StatNum;
 
 /**
  * Classe che forma Arraylist di Dati e Metadati

@@ -28,9 +28,10 @@ public class ParserJSON {
 	 *
 	 * @param fileName nome del json da parsare
 	 * @return ritorna l'ArrayList
+	 * @throws java.text.ParseException 
 	 *
 	**/
-	public ArrayList<Data> parserJson(String fileName)
+	public ArrayList<Data> parserJson(String fileName) throws java.text.ParseException
     {
 		ArrayList<Data> Albums = new ArrayList<>();
     	JSONObject object;

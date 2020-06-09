@@ -1,9 +1,16 @@
 package it.univpm.SpringBootApp.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 //import java.util.ArrayList;
 
 //import it.univpm.SpringBootApp.model.Place;
@@ -20,7 +27,7 @@ public class Data implements Serializable{
 	protected String id;
 	protected boolean can_upload;
 	protected long count;
-	protected String created_time;
+	protected Date created_time;
 	protected String description;
 	protected String event;
 	protected String link;
@@ -29,7 +36,7 @@ public class Data implements Serializable{
 	protected Place place;
 	protected String privacy;
 	protected String type;
-	protected String updated_time;
+	protected Date updated_time;
 
 
 /**
@@ -49,9 +56,9 @@ public class Data implements Serializable{
 * @param updated_time;
  */
 
-public Data(String id, boolean can_upload, long count, String created_time,
+public Data(String id, boolean can_upload, long count, Date created_time,
 String description, String event, String link, String location,
-String name, Place place, String privacy, String type, String updated_time) {
+String name, Place place, String privacy, String type, Date updated_time) {
 	super();
 	this.id=id;
 	this.can_upload=can_upload;
@@ -109,7 +116,7 @@ public long getcount() {
  * @return created_time
  */
 
-public String getcreated_time() {
+public Date getcreated_time() {
 	return created_time;
 }
 
@@ -182,7 +189,7 @@ public String gettype() {
  * @return updated_time
  */
 
-public String getupdated_time() {
+public Date getupdated_time() {
 	return updated_time;
 }
 
@@ -225,10 +232,12 @@ public void setcount(long count) {
 /**
  * Metodo che imposta il valore di created_time
  * @param created_time
+ * @throws ParseException 
  */
 
-public void setcreated_time(String created_time) {
-	this.created_time = created_time;
+public void setcreated_time(String ct) throws ParseException {
+	DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS", Locale.ITALY);
+	created_time = format.parse(ct);
 }
 
 /**
@@ -299,8 +308,9 @@ public void settype(String type) {
  * @param updated_time
  */
 
-public void setupdated_time(String updated_time) {
-	this.updated_time = updated_time;
+public void setupdated_time(String ut) throws ParseException {
+	DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS", Locale.ITALY);
+	updated_time = format.parse(ut);
 }
 
 /**

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import it.univpm.SpringBootApp.model.*;
+import it.univpm.SpringBootApp.utils.StatNum;
 
 @RestController
 public class MainController {
@@ -51,6 +52,40 @@ public class MainController {
     		return lista;
     	}
 	}
+	
+	@GetMapping("/statdatayear")
+	public Map<String, Object> getStatDataY(){
+		ArrayList<Number> listYear = new ArrayList<Number>();
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listYear.add(AlbumS.arrData.get(i).getcreated_time().getYear()+1900);
+		}
+		StatNum statY = new StatNum();
+		return statY.NumStatData(listYear);
+		}
+	
+	@GetMapping("/statdatamouth")
+	public Map<String, Object> getStatDataM(){
+		ArrayList<Number> listMouth = new ArrayList<Number>();
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listMouth.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
+		}
+		StatNum statM = new StatNum();
+		return statM.NumStatData(listMouth);
+		}
+	
+	@GetMapping("/statdataday")
+	public Map<String, Object> getStatDataD(){
+		ArrayList<Number> listDay = new ArrayList<Number>();
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listDay.add(AlbumS.arrData.get(i).getcreated_time().getDay());
+		}
+		StatNum statD = new StatNum();
+		return statD.NumStatData(listDay);
+		}
+		
+	
+	
+	
 
 	
 

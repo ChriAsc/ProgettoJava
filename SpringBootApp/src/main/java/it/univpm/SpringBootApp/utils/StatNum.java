@@ -229,5 +229,22 @@ public class StatNum{
 		}
 		return maps;
 	}
+    
+    public Map<String, Object> NumStatData(ArrayList<Number> numLista) {
+    	Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
+    	setCount(numLista);
+    	setSum(numLista);
+    	setAvg(numLista);
+    	setMin(numLista);
+    	setMax(numLista);
+    	setDev(numLista);
+    	maps.put("count", getCount());
+    	maps.put("sum", getSum());
+    	maps.put("avg", getAvg());
+        maps.put("min", getMin());
+        maps.put("max", getMax());
+        maps.put("dev", getDev());
+        return maps;
+    }
 
 }

@@ -228,6 +228,10 @@ public class StatNum{
 		return maps;
 	}
     
+    /**
+	 * Metodo che restituisce una mappa nella quale vengono visualizzate le statistiche
+	 *  
+	 * */
     public Map<String, Object> NumStatData(ArrayList<Number> numLista) {
     	Map<String, Object> maps = new HashMap<>();  //crea una mappa che contiene le chiavi e i valori delle statistiche numeriche
     	setCount(numLista);

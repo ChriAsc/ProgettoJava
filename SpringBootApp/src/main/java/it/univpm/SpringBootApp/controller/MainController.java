@@ -36,6 +36,9 @@ public class MainController {
 		return AlbumS.getarrData();
 	}
 	
+	/**
+     * Rotta che restituisce le statistiche in base al campo inserito
+     */
 	@GetMapping("/statistiche")
     public ArrayList<Map> getStatistiche(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
     	Field[] fields = Data.class.getDeclaredFields();

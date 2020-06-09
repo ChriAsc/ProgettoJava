@@ -1,6 +1,7 @@
 package it.univpm.SpringBootApp.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.lang.reflect.Field; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,34 +57,37 @@ public class MainController {
     	}
 	}
 	
-	@GetMapping("/statdatayear")
+	@GetMapping("/statdate")
 	public Map<String, Object> getStatDataY(){
 		ArrayList<Number> listYear = new ArrayList<Number>();
+		ArrayList<Number> listMonth = new ArrayList<Number>();
+		ArrayList<Number> listDay = new ArrayList<Number>();
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
 			listYear.add(AlbumS.arrData.get(i).getcreated_time().getYear()+1900);
 		}
-		StatNum statY = new StatNum();
-		return statY.NumStatData(listYear);
-		}
-	
-	@GetMapping("/statdatamonth")
-	public Map<String, Object> getStatDataM(){
-		ArrayList<Number> listMonth = new ArrayList<Number>();
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
 			listMonth.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
 		}
-		StatNum statM = new StatNum();
-		return statM.NumStatData(listMonth);
-		}
-	
-	@GetMapping("/statdataday")
-	public Map<String, Object> getStatDataD(){
-		ArrayList<Number> listDay = new ArrayList<Number>();
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
 			listDay.add(AlbumS.arrData.get(i).getcreated_time().getDay());
-		}
+		}		
+		StatNum statY = new StatNum();
+		StatNum statM = new StatNum();
 		StatNum statD = new StatNum();
-		return statD.NumStatData(listDay);
+		Map<String, Object> YMD = new LinkedHashMap<>();
+		YMD.put("campY", "Year");
+		for (Map.Entry<String, Object> entry : statY.NumStatData(listYear).entrySet()) {
+			YMD.put(entry.getKey()+"Y",entry.getValue());
+		}
+		YMD.put("campM", "Mouth");
+		for (Map.Entry<String, Object> entry : statM.NumStatData(listMonth).entrySet()) {
+			YMD.put(entry.getKey()+"M",entry.getValue());
+		}
+		YMD.put("campD", "Day");
+		for (Map.Entry<String, Object> entry : statD.NumStatData(listDay).entrySet()) {
+			YMD.put(entry.getKey()+"D",entry.getValue());
+		}
+		return YMD;
 		}
 	
 	@GetMapping("/statisto")

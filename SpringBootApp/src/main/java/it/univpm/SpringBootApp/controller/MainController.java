@@ -66,14 +66,14 @@ public class MainController {
 		return statY.NumStatData(listYear);
 		}
 	
-	@GetMapping("/statdatamouth")
+	@GetMapping("/statdatamonth")
 	public Map<String, Object> getStatDataM(){
-		ArrayList<Number> listMouth = new ArrayList<Number>();
+		ArrayList<Number> listMonth = new ArrayList<Number>();
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
-			listMouth.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
+			listMonth.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
 		}
 		StatNum statM = new StatNum();
-		return statM.NumStatData(listMouth);
+		return statM.NumStatData(listMonth);
 		}
 	
 	@GetMapping("/statdataday")
@@ -85,8 +85,32 @@ public class MainController {
 		StatNum statD = new StatNum();
 		return statD.NumStatData(listDay);
 		}
-		
 	
+	@GetMapping("/statisto")
+	public Map<String, Object> getIsto(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
+		ArrayList<Number> listIsto = new ArrayList<Number>();
+		StatNum statIsto = new StatNum();
+		if(fieldName.equals("year")) {
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listIsto.add(AlbumS.arrData.get(i).getcreated_time().getYear());
+		}
+		return statIsto.StatIstoYear(listIsto);
+		}
+		else if(fieldName.equals("month")) {
+			for(int i=0; i < AlbumS.arrData.size(); i++) {
+				listIsto.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
+			}
+			return statIsto.StatIstoMonth(listIsto);
+		}
+			else if(fieldName.equals("day")) {
+				for(int i=0; i < AlbumS.arrData.size(); i++) {
+					listIsto.add(AlbumS.arrData.get(i).getcreated_time().getDay());
+				}
+				return statIsto.StatIstoDay(listIsto);
+			}
+		return null;
+		
+	}
 	
 	
 

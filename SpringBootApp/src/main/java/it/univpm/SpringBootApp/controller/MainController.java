@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import it.univpm.SpringBootApp.model.*;
+import it.univpm.SpringBootApp.utils.StatBase;
 import it.univpm.SpringBootApp.utils.StatNum;
 
 @RestController
@@ -43,16 +44,17 @@ public class MainController {
 	@GetMapping("/statistiche")
     public ArrayList<Map> getStatistiche(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
     	Field[] fields = Data.class.getDeclaredFields();
+    	StatBase sb = new StatBase();
     	ArrayList<Map> lista = new ArrayList<>();
     	if(fieldName.equals("")) // se non viene specificato nulla, calcolerà le statistiche di ogni attributo
     	{  
     		for(int i=0; i < fields.length; i++) {
-    			lista.add(AlbumS.getStatistiche(fields[i].getName()));		
+    			lista.add(sb.getStatistiche(fields[i].getName()));		
     		}
     		return lista;
     	}
     	else {  											// altrimenti calcolerà le statistiche del solo attributo richiesto
-    		lista.add(AlbumS.getStatistiche(fieldName));
+    		lista.add(sb.getStatistiche(fieldName));
     		return lista;
     	}
 	}

@@ -70,6 +70,6 @@ public class Place{
 	
 	@Override
 	public String toString() {
-		return " PLACEID: " + getid_place() + " "+getlocation_place()+" PLACENAME: "+getname_place();
+		return " " + getid_place() + " " + getlocation_place() + " " + getname_place();
 	}
 }

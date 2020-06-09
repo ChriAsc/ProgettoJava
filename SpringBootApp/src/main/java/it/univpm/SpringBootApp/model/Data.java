@@ -21,8 +21,9 @@ import java.util.Locale;
  *
  */
 
-@SuppressWarnings("serial")
 public class Data implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected boolean can_upload;
 	protected long count;
@@ -319,5 +320,11 @@ public void setupdated_time(String ut) throws ParseException {
 
 public void setplace(Place place) {
 	this.place = place;
+}
+
+@Override
+public String toString() {
+	return " " + getid() + " " + getcan_upload() + " " + getcount() + " " +  getcreated_time() + " " + getdescription() + " " + getevent() + " " + getlink() + " " + getlocation() + " " + getname() + " " + getprivacy() + " " + gettype() + " " + getupdated_time() + " " + getplace() ;
+	
 }
 }

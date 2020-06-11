@@ -22,8 +22,7 @@ import it.univpm.SpringBootApp.service.ParserJSON;
 public class Database{
 	public ArrayList<Data> arrData = new ArrayList<>();
 	public ArrayList<Metadata> arrMetadata = new ArrayList<>();
-	
-	
+		
 	/**
 	* Costruttore della classe Database
 	* @throws IOException 

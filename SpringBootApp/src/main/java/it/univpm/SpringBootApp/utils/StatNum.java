@@ -1,7 +1,6 @@
 package it.univpm.SpringBootApp.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -169,7 +168,7 @@ public class StatNum{
 	 * @param numList
 	 * @return map
 	 * */
-    public Map<String, Object> NumStatData(ArrayList<Number> numList) {
+    public Map<String, Object> NumStatDate(ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>();  
     	setCount(numList);
     	setSum(numList);

@@ -26,6 +26,7 @@ public class JSONGetAndDecode {
 		/**
 		 * Costruttore che copia il contenuto dell'URL e lo memorizza in una variabile
 		 * @param url L'indirizzo web nel quale è contenuto il link al dataset
+		 * @throws IOException
 		 */
 		public JSONGetAndDecode(String url) throws IOException
 		{

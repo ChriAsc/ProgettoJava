@@ -68,8 +68,4 @@ public class Place{
 		this.id_place = id_place;
 	}
 	
-	@Override
-	public String toString() {
-		return " " + getid_place() + " " + getlocation_place() + " " + getname_place();
-	}
 }

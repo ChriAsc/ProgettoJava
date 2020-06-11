@@ -27,21 +27,22 @@ public class Database{
 	/**
 	* Costruttore della classe Database
 	* @throws IOException 
-	 *@throws NoSuchMethodException 
-	 * @throws ParseException 
+	*@throws NoSuchMethodException 
+	* @throws ParseException 
 	*/
 	public Database() throws IOException, NoSuchMethodException, ParseException
 	{
 		arrMetadata.add(new Metadata("id", "String"));
 		arrMetadata.add(new Metadata("can_upload", "boolean"));
-		arrMetadata.add(new Metadata("count", "int"));
-		arrMetadata.add(new Metadata("created_time", "SimpleDateFormat"));
+		arrMetadata.add(new Metadata("count", "long"));
+		arrMetadata.add(new Metadata("created_time", "Date"));
 		arrMetadata.add(new Metadata("description", "String"));
 		arrMetadata.add(new Metadata("event", "String"));
 		arrMetadata.add(new Metadata("link", "String"));
 		arrMetadata.add(new Metadata("location", "String"));
 		arrMetadata.add(new Metadata("name", "String"));
 		arrMetadata.add(new Metadata("place", "Place"));
+		
 		arrMetadata.add(new Metadata("name_place", "String"));
 		arrMetadata.add(new Metadata("location_place", "Location"));
 		arrMetadata.add(new Metadata("id_place", "string"));
@@ -50,12 +51,10 @@ public class Database{
 		arrMetadata.add(new Metadata("latitude_location", "double"));
 		arrMetadata.add(new Metadata("longitude_location", "double"));
 		arrMetadata.add(new Metadata("zip_location", "String"));
+		
 		arrMetadata.add(new Metadata("privacy", "String"));
 		arrMetadata.add(new Metadata("type", "String"));
-
-		arrMetadata.add(new Metadata("updated_time", "String"));
-
-		arrMetadata.add(new Metadata("updated_time", "SimpleDateFormat"));
+		arrMetadata.add(new Metadata("updated_time", "Date"));
 
 		fillData();
 	}
@@ -63,8 +62,7 @@ public class Database{
 	/**
 	 * Metodo che restituisce arrData
 	 * @return arrData
-	 */
-	
+	 */	
 	public ArrayList<Data> getarrData() {
 		return arrData;
 	}
@@ -72,8 +70,7 @@ public class Database{
 	/**
 	 * Metodo che restituisce arrMetadata
 	 * @return arrMetadata
-	 */
-	
+	 */	
 	public ArrayList<Metadata> getarrMetadata() {
 		return arrMetadata;
 	}
@@ -91,11 +88,12 @@ public class Database{
 	 * sulla base dei valori scaricati ed estratti dal Parser
 	 * @param Data
 	 * @throws ParseException 
+	 * @throws IOException
 	 */
 	public void fillData() throws IOException, ParseException {
 		File file = new File("dataFile.json");
         if(!file.exists()){
-			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBACwCc9ZCtlSwTZAMTNTtSAZBJFTZCReLq041adZCCzPbJThOrjtOnSEpnoW0nmVccgS14WDm3SjwPklqrr1QU9rbvivG78bZCF0JxUo0KdzxZCrEhLNZBry1Wo41ieuiQ3MBux5rdijv15jWCue95yAonO6gAWtJXGgxSyHEMrNt3Tgbdp9khUjXBMSkZCpVCZCQwNA7aCx1ZAOvuyYLZBr2BhlZAcmcCZBlD3CwZDZD");
+			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAFtGTA27qFBJGqXXocsd6Dhb7cPkZBqJe8fBs2CpTSCxwakPURSWTTpOgfbCqKNX8XI70cUHOZB4Elny19RlHZCwpbxMKmEH6hH7rPVpUR1BOSmf46Mdz70pQZCtZB1BDYtkUDLiYvlR9NfRO1nW13n9MdGtRQXa3xNIjoqMem4ldDPWzW8e7ZCSGtrBpqliWre8p6KXZANWKwUZAbLOsZAmHyWGrfEdqngZDZD");
 			try {
 				download.downloadJson(file.getName());
 			} catch (JSONException e) {
@@ -105,6 +103,5 @@ public class Database{
         ParserJSON parseFile = new ParserJSON();
         arrData = parseFile.parserJson(file.getName());
 	}
-	
-	
+		
 }

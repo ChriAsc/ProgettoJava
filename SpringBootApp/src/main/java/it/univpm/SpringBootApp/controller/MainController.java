@@ -43,25 +43,25 @@ public class MainController {
      * Rotta che restituisce le statistiche in base al campo inserito
      */
 	@GetMapping("/statistiche")
-    public ArrayList<Map> getStatistiche(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
+    public ArrayList<Map> getStatistics(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
     	Field[] fields = Data.class.getDeclaredFields();
     	StatBase sb = new StatBase();
     	ArrayList<Map> list = new ArrayList<>();
     	if(fieldName.equals("")) 
     	{  
     		for(int i=0; i < fields.length; i++) {
-    			list.add(sb.getStatistiche(fields[i].getName()));		
+    			list.add(sb.getStatistics(fields[i].getName()));		
     		}
     		return list;
     	}
     	else {  											
-    		list.add(sb.getStatistiche(fieldName));
+    		list.add(sb.getStatistics(fieldName));
     		return list;
     	}
 	}
 	
 	@GetMapping("/statdate")
-	public Map<String, Object> getStatDataY(){
+	public Map<String, Object> getStatDate(){
 		ArrayList<Number> listYear = new ArrayList<Number>();
 		ArrayList<Number> listMonth = new ArrayList<Number>();
 		ArrayList<Number> listDay = new ArrayList<Number>();
@@ -79,15 +79,15 @@ public class MainController {
 		StatNum statD = new StatNum();
 		Map<String, Object> YMD = new LinkedHashMap<>();
 		YMD.put("campY", "Year");
-		for (Map.Entry<String, Object> entry : statY.NumStatData(listYear).entrySet()) {
+		for (Map.Entry<String, Object> entry : statY.NumStatDate(listYear).entrySet()) {
 			YMD.put(entry.getKey()+"Y",entry.getValue());
 		}
 		YMD.put("campM", "Mouth");
-		for (Map.Entry<String, Object> entry : statM.NumStatData(listMonth).entrySet()) {
+		for (Map.Entry<String, Object> entry : statM.NumStatDate(listMonth).entrySet()) {
 			YMD.put(entry.getKey()+"M",entry.getValue());
 		}
 		YMD.put("campD", "Day");
-		for (Map.Entry<String, Object> entry : statD.NumStatData(listDay).entrySet()) {
+		for (Map.Entry<String, Object> entry : statD.NumStatDate(listDay).entrySet()) {
 			YMD.put(entry.getKey()+"D",entry.getValue());
 		}
 		return YMD;

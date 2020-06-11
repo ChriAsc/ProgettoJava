@@ -318,9 +318,4 @@ public void setplace(Place place) {
 	this.place = place;
 }
 
-@Override
-public String toString() {
-	return " " + getid() + " " + getcan_upload() + " " + getcount() + " " +  getcreated_time() + " " + getdescription() + " " + getevent() + " " + getlink() + " " + getlocation() + " " + getname() + " " + getprivacy() + " " + gettype() + " " + getupdated_time() + " " + getplace() ;
-	
-}
 }

@@ -13,8 +13,7 @@ public class Metadata {
      Costruttore della classe Metadata
 	 * @param spec, Parametro che rappresenta la descrizione del campo
 	 * @param type, Parametro che rappresenta il tipo del campo
-     */
-	
+     */	
 	public Metadata(String spec, String type)
 	{
 		this.spec = spec;
@@ -22,12 +21,21 @@ public class Metadata {
 	}
 	
 	/**
+    Costruttore base della classe Metadata
+    */
+	public Metadata()
+	{
+
+	}
+		
+	/**
 	 * Metodo che restituisce spec
 	 * @return spec
 	 */
 	public String getspec() {
 		return spec;
 	}
+	
 	/**
 	 * Metodo che restituisce type
 	 * @return type

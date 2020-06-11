@@ -104,8 +104,4 @@ public class Location{
 		this.zip_location = zip_location;
 	}
 	
-	@Override
-	public String toString(){
-		return " " + getcity_location() + " "+getcountry_location() + " " + getlatitude_location() + " " + getlongitude_location() + " " + getzip_location();
-	}
 }

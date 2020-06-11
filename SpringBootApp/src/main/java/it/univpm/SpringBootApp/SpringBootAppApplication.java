@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 /**
-	 * Main del programma. Inizialmente si istanzia un oggetto della classe JsonGetDecode per scaricare
-	 * il file json contenete i dati. Successivamente si avvia la spring application.
+	 * Main del programma
 	 * @param args
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @author Cristian Cingolani & Christian Ascani
  */
 @SpringBootApplication

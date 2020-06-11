@@ -36,7 +36,7 @@ public class StatBase {
 	 * @throws ParseException 
 	 * @throws IOException 
 	 */
-	public Map<String, Object> getStatistiche(String field) throws NoSuchMethodException, IOException, ParseException 
+	public Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException 
 	{
 		Database db = new Database();
 		Map<String, Object> map = new HashMap<>();
@@ -119,7 +119,7 @@ public class StatBase {
 	 * @param list
 	 * @return map
 	 */
-	public static Map<Object, Integer> getElem(ArrayList<Object> list) {
+	public Map<Object, Integer> getElem(ArrayList<Object> list) {
 		Map<Object,Integer> map = new HashMap<>();  
 		for(Object obj : list) { 
 			if(map.containsKey(obj))  

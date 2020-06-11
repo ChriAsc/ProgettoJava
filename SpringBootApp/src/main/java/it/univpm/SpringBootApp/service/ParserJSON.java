@@ -41,22 +41,62 @@ public class ParserJSON {
 	        	Data a = new Data();
 	        	//filling Album a
 	            JSONObject array = (JSONObject) arr.get(i);
-	            a.setid((String) array.get("id"));
+	            if(array.get("id")!=null)
+	            {
+	            	a.setid((String) array.get("id"));
+	            }
+	            else
+	            {
+	            	a.setid("null");
+	            }
+	            
 	            a.setcan_upload((boolean) array.get("can_upload"));
 	            a.setcount((long) array.get("count"));
 	            a.setcreated_time((String) array.get("created_time"));
+	            if(array.get("description")!=null)
+	            {
 	            a.setdescription((String) array.get("description"));
+	            }
+	            else
+	            {
+	            	a.setdescription("null");
+	            }
+	            if(array.get("event")!=null)
+	            {
 	            a.setevent((String) array.get("event"));
+	            }
+	            else
+	            {
+	            	a.setevent("null");
+	            }
 	            a.setlink((String) array.get("link"));
+	            if(array.get("location")!=null)
+	            {
 	            a.setlocation((String) array.get("location"));
+	            }
+	            else
+	            {
+	            	a.setlocation("null");
+	            }
 	            a.setname((String) array.get("name"));
 	            a.setprivacy((String) array.get("privacy"));
 	            a.settype((String) array.get("type"));
 	            a.setupdated_time((String) array.get("updated_time"));
 	            
-	            JSONObject places = (JSONObject) array.get("place");
-	            if(places != null) {
-	            	Place p = new Place();
+	            Place p = new Place();
+            	p.setname_place("null");
+            	p.setid_place("null");
+            	Location l = new Location();
+            	l.setcity_location("null");
+            	l.setcountry_location("null");
+            	l.setlatitude_location(0.0);
+            	l.setlongitude_location(0.0);
+            	l.setzip_location("null");
+            	p.setid_place("null");
+	            
+	            
+	            if((JSONObject) array.get("place") != null) {
+	            	JSONObject places = (JSONObject) array.get("place");
 	            	String name = (String) places.get("name");
 	            	p.setname_place(name);
 	            	String id = (String) places.get("id");
@@ -65,7 +105,6 @@ public class ParserJSON {
 	            	JSONObject locations = (JSONObject) places.get("location");
 	            	if(!locations.isEmpty()) {
 	            		            		
-                        Location l = new Location();
                         String city = (String) locations.get("city");
                         l.setcity_location(city);
                         String country = (String) locations.get("country");

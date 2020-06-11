@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Cingolani Cristian & Ascani Christian
  */
 
-public class StatNum extends StatBase{
+public class StatNum{
 	
 	private double sum;
 	private int count;
@@ -76,37 +76,37 @@ public class StatNum extends StatBase{
 	
     /**
      * Metodo che calcola e imposta il valore di sum
-     * @param values
+     * @param val
      */
-    private void setSum(ArrayList<Number> values) {
-    	for (Number v : values){
+    private void setSum(ArrayList<Number> val) {
+    	for (Number v : val){
             sum += v.doubleValue();
         }
     }    
     
     /**
      * Metodo che calcola e imposta il valore di count
-     * @param values
+     * @param val
      */
-    protected void setCount(ArrayList values) {
-    	count= values.size();
+    protected void setCount(ArrayList val) {
+    	count= val.size();
     }      
     
     /**
      * Metodo che calcola e imposta il valore di avg
-     * @param avg
+     * @param val
      */  
-    private void setAvg(ArrayList<Number> values) {
+    private void setAvg(ArrayList<Number> val) {
         avg = getSum()/getCount();
     }
     
     /**
      * Metodo che calcola e imposta il valore di min
-     * @param values
+     * @param val
      */
-    private void setMin(ArrayList<Number> values) {
-    	min = values.get(0).doubleValue();
-    	for(Number n : values) {
+    private void setMin(ArrayList<Number> val) {
+    	min = val.get(0).doubleValue();
+    	for(Number n : val) {
     		if(n.doubleValue() < min) {
                 min = n.doubleValue();
             }
@@ -115,11 +115,11 @@ public class StatNum extends StatBase{
     
     /**
      * Metodo che calcola e imposta il valore di max
-     * @param max
+     * @param val
      */
-    private void setMax(ArrayList<Number> values) {
-        max = values.get(0).doubleValue();
-        for(Number n : values) {
+    private void setMax(ArrayList<Number> val) {
+        max = val.get(0).doubleValue();
+        for(Number n : val) {
     		if(n.doubleValue() > max) {
                 max = n.doubleValue();
             }
@@ -128,11 +128,11 @@ public class StatNum extends StatBase{
     
     /**
      * Metodo che calcola e imposta il valore di dev
-     * @param dev
+     * @param val
      */
-    private void setDev(ArrayList<Number> values) {
+    private void setDev(ArrayList<Number> val) {
     	dev = 0;
-    	for(Number numero : values) {
+    	for(Number numero : val) {
     		dev += Math.pow(numero.doubleValue() - getAvg(), 2);
     	}
         dev=((double) Math.pow(dev/getCount(), 0.5));
@@ -142,164 +142,165 @@ public class StatNum extends StatBase{
      * Metodo che riceve in ingresso un particolare field ed un arraylist di number
      * restituisce una mappa con tutte le statistiche di tipo numerico
      * @param field
-     * @param numLista
-     * @return maps
+     * @param numList
+     * @return map
      */
-    public Map<String, Object> NumStat(String field, ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new HashMap<>(); 
-    	setCount(numLista);
-    	setSum(numLista);
-    	setAvg(numLista);
-    	setMin(numLista);
-    	setMax(numLista);
-    	setDev(numLista);
-    	maps.put("field", field);
-    	maps.put("count", getCount());
-    	maps.put("sum", getSum());
-    	maps.put("avg", getAvg());
-        maps.put("min", getMin());
-        maps.put("max", getMax());
-        maps.put("dev", getDev());
-        return maps;
+    public Map<String, Object> NumStat(String field, ArrayList<Number> numList) {
+    	Map<String, Object> map = new LinkedHashMap<>(); 
+    	setCount(numList);
+    	setSum(numList);
+    	setAvg(numList);
+    	setMin(numList);
+    	setMax(numList);
+    	setDev(numList);
+    	map.put("field", field);
+    	map.put("count", getCount());
+    	map.put("sum", getSum());
+    	map.put("avg", getAvg());
+        map.put("min", getMin());
+        map.put("max", getMax());
+        map.put("dev", getDev());
+        return map;
     }
 	 
     /**
 	 * Metodo che riceve in ingresso un arraylist di number
-	 * @param numLista 
-	 * @return maps
+	 * restituisce una mappa con tutte le statistiche di tipo numerico (per la data)
+	 * @param numList
+	 * @return map
 	 * */
-    public Map<String, Object> NumStatData(ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new LinkedHashMap<>();  
-    	setCount(numLista);
-    	setSum(numLista);
-    	setAvg(numLista);
-    	setMin(numLista);
-    	setMax(numLista);
-    	setDev(numLista);
-    	maps.put("count", getCount());
-    	maps.put("avg", getAvg());
-        maps.put("min", getMin());
-        maps.put("max", getMax());
-        maps.put("dev", getDev());
-        return maps;
+    public Map<String, Object> NumStatData(ArrayList<Number> numList) {
+    	Map<String, Object> map = new LinkedHashMap<>();  
+    	setCount(numList);
+    	setSum(numList);
+    	setAvg(numList);
+    	setMin(numList);
+    	setMax(numList);
+    	setDev(numList);
+    	map.put("count", getCount());
+    	map.put("avg", getAvg());
+        map.put("min", getMin());
+        map.put("max", getMax());
+        map.put("dev", getDev());
+        return map;
     }
     
     /**
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun anno (dal 2010 al 2020)
 	 * restituisce una map con tutti gli anni(chiave) e con le relative occorrenze(valore)
-	 * @param numLista 
-	 * @return maps
+	 * @param numList
+	 * @return map
 	 * */
-    public Map<String, Object> StatIstoYear(ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new LinkedHashMap<>();
+    public Map<String, Object> StatIstoYear(ArrayList<Number> numList) {
+    	Map<String, Object> map = new LinkedHashMap<>();
     	int[] years = new int[11];
     	for(int i=0; i < 11; i++) {
     		years[i]=0;
     	}   	
-    	for(int i=0; i < numLista.size(); i++) {
+    	for(int i=0; i < numList.size(); i++) {
     		for(int j=2010; j < 2021; j++) {
-    			if(numLista.get(i).intValue()+1900==j) years[j-2010]++;
+    			if(numList.get(i).intValue()+1900==j) years[j-2010]++;
     		}
     	}
-    	maps.put("2010",years[0]);
-    	maps.put("2011",years[1]);
-    	maps.put("2012",years[2]);
-    	maps.put("2013",years[3]);
-    	maps.put("2014",years[4]);
-    	maps.put("2015",years[5]);
-    	maps.put("2016",years[6]);
-    	maps.put("2017",years[7]);
-    	maps.put("2018",years[8]);
-    	maps.put("2019",years[9]);
-    	maps.put("2020",years[10]);
-    	return maps;	
+    	map.put("2010",years[0]);
+    	map.put("2011",years[1]);
+    	map.put("2012",years[2]);
+    	map.put("2013",years[3]);
+    	map.put("2014",years[4]);
+    	map.put("2015",years[5]);
+    	map.put("2016",years[6]);
+    	map.put("2017",years[7]);
+    	map.put("2018",years[8]);
+    	map.put("2019",years[9]);
+    	map.put("2020",years[10]);
+    	return map;	
     }
     
     /**
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun mese
 	 * restituisce una map con tutti i mesi(chiave) e con le relative occorrenze(valore)
-	 * @param numLista 
-	 * @return maps
+	 * @param numList 
+	 * @return map
 	 * */
-    public Map<String, Object> StatIstoMonth(ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new LinkedHashMap<>();
+    public Map<String, Object> StatIstoMonth(ArrayList<Number> numList) {
+    	Map<String, Object> map = new LinkedHashMap<>();
     	int[] months = new int[12];
     	for(int i=0; i < 12; i++) {
     		months[i]=0;
     	}   	
-    	for(int i=0; i < numLista.size(); i++) {
+    	for(int i=0; i < numList.size(); i++) {
     		for(int j=1; j < 13; j++) {
-    			if(numLista.get(i).intValue()==j) months[j-1]++;
+    			if(numList.get(i).intValue()==j) months[j-1]++;
     		}
     	}
-    	maps.put("Gennaio",months[0]);
-    	maps.put("Febbraio",months[1]);
-    	maps.put("Marzo",months[2]);
-    	maps.put("Aprile",months[3]);
-    	maps.put("Maggio",months[4]);
-    	maps.put("Giugno",months[5]);
-    	maps.put("Luglio",months[6]);
-    	maps.put("Agosto",months[7]);
-    	maps.put("Settembre",months[8]);
-    	maps.put("Ottobre",months[9]);
-    	maps.put("Novembre",months[10]);
-    	maps.put("Dicembre",months[11]);
-    	return maps;	
+    	map.put("Gennaio",months[0]);
+    	map.put("Febbraio",months[1]);
+    	map.put("Marzo",months[2]);
+    	map.put("Aprile",months[3]);
+    	map.put("Maggio",months[4]);
+    	map.put("Giugno",months[5]);
+    	map.put("Luglio",months[6]);
+    	map.put("Agosto",months[7]);
+    	map.put("Settembre",months[8]);
+    	map.put("Ottobre",months[9]);
+    	map.put("Novembre",months[10]);
+    	map.put("Dicembre",months[11]);
+    	return map;	
     }
     
     /**
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun giorno
 	 * restituisce una map con tutti i giorni(chiave) e con le relative occorrenze(valore)
-	 * @param numLista 
-	 * @return maps
+	 * @param numList
+	 * @return map
 	 * */   
-    public Map<String, Object> StatIstoDay(ArrayList<Number> numLista) {
-    	Map<String, Object> maps = new LinkedHashMap<>();
+    public Map<String, Object> StatIstoDay(ArrayList<Number> numList) {
+    	Map<String, Object> map = new LinkedHashMap<>();
     	int[] days = new int[31];
     	for(int i=0; i < 31; i++) {
     		days[i]=0;
     	}
     	
-    	for(int i=0; i < numLista.size(); i++) {
+    	for(int i=0; i < numList.size(); i++) {
     		for(int j=1; j < 32; j++) {
-    			if(numLista.get(i).intValue()==j) days[j-1]++;
+    			if(numList.get(i).intValue()==j) days[j-1]++;
     		}
     	}
-    	maps.put("1",days[0]);
-    	maps.put("2",days[1]);
-    	maps.put("3",days[2]);
-    	maps.put("4",days[3]);
-    	maps.put("5",days[4]);
-    	maps.put("6",days[5]);
-    	maps.put("7",days[6]);
-    	maps.put("8",days[7]);
-    	maps.put("9",days[8]);
-    	maps.put("10",days[9]);
-    	maps.put("11",days[10]);
-    	maps.put("12",days[11]);
-    	maps.put("13",days[12]);
-    	maps.put("14",days[13]);
-    	maps.put("15",days[14]);
-    	maps.put("16",days[15]);
-    	maps.put("17",days[16]);
-    	maps.put("18",days[17]);
-    	maps.put("19",days[18]);
-    	maps.put("20",days[19]);
-    	maps.put("21",days[20]);
-    	maps.put("22",days[21]);
-    	maps.put("23",days[22]);
-    	maps.put("24",days[23]);
-    	maps.put("25",days[24]);
-    	maps.put("26",days[25]);
-    	maps.put("27",days[26]);
-    	maps.put("28",days[27]);
-    	maps.put("29",days[28]);
-    	maps.put("30",days[29]);
-    	maps.put("31",days[30]);
-    	return maps;	
+    	map.put("1",days[0]);
+    	map.put("2",days[1]);
+    	map.put("3",days[2]);
+    	map.put("4",days[3]);
+    	map.put("5",days[4]);
+    	map.put("6",days[5]);
+    	map.put("7",days[6]);
+    	map.put("8",days[7]);
+    	map.put("9",days[8]);
+    	map.put("10",days[9]);
+    	map.put("11",days[10]);
+    	map.put("12",days[11]);
+    	map.put("13",days[12]);
+    	map.put("14",days[13]);
+    	map.put("15",days[14]);
+    	map.put("16",days[15]);
+    	map.put("17",days[16]);
+    	map.put("18",days[17]);
+    	map.put("19",days[18]);
+    	map.put("20",days[19]);
+    	map.put("21",days[20]);
+    	map.put("22",days[21]);
+    	map.put("23",days[22]);
+    	map.put("24",days[23]);
+    	map.put("25",days[24]);
+    	map.put("26",days[25]);
+    	map.put("27",days[26]);
+    	map.put("28",days[27]);
+    	map.put("29",days[28]);
+    	map.put("30",days[29]);
+    	map.put("31",days[30]);
+    	return map;	
     }
    
 }

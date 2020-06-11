@@ -95,7 +95,7 @@ public class Database{
 	public void fillData() throws IOException, ParseException {
 		File file = new File("dataFile.json");
         if(!file.exists()){
-			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBADHqHKXxySRdKfEFHeMyfGPOyP7YArpZBiQwWXcGngjVoPGre5yMG2mTsfBMpFInyGhQcv0GjkIUqDLkSOe5Vid4gNvKgVshyJkoyDpy3x61gUOARYM6V7kcIax3MWzjNBFxRsQDXbmygEDZANKd7QT1jQpXEaG4pDL45nkSfPBayaHhIXs1SxSGcq9NfEYJj6Vnr7SNLCwutjvAuAKWNi0wScvgZDZD");
+			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBACwCc9ZCtlSwTZAMTNTtSAZBJFTZCReLq041adZCCzPbJThOrjtOnSEpnoW0nmVccgS14WDm3SjwPklqrr1QU9rbvivG78bZCF0JxUo0KdzxZCrEhLNZBry1Wo41ieuiQ3MBux5rdijv15jWCue95yAonO6gAWtJXGgxSyHEMrNt3Tgbdp9khUjXBMSkZCpVCZCQwNA7aCx1ZAOvuyYLZBr2BhlZAcmcCZBlD3CwZDZD");
 			try {
 				download.downloadJson(file.getName());
 			} catch (JSONException e) {

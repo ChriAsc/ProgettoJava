@@ -13,19 +13,20 @@ public class StatStr extends StatBase{
 		
 	}
 	/**
-	 * Metodo che preso in ingresso l'arraylist lista ritorna le statistiche riguardanti stringhe
+	 * Metodo che prende in ingresso l'arraylist list ed il campo field  
+	 * restituisce una mappa con tutte le statistiche di tipo stringa
 	 * @param list
 	 * @param field
-	 * @return maps
+	 * @return map
 	 */
 	public Map<String, Object> StrStat(String field, ArrayList<Object> list) {
 		StatNum sn = new StatNum();
-		Map<String, Object> maps = new HashMap<>();  
+		Map<String, Object> map = new HashMap<>();  
 		sn.setCount(list);
-		maps.put("field", field);
-		maps.put("count", sn.getCount());
-		maps.put("elementi unici", getUniqueElement(list));
-	    return maps;
+		map.put("field", field);
+		map.put("count", sn.getCount());
+		map.put("elements", getElem(list));
+	    return map;
 	}
 	
 	

@@ -22,6 +22,7 @@ public class MainController {
      */
 	@Autowired
 	private Database AlbumS;
+	
 	/**
      * Rotta che restituisce tutti i metadati
      */
@@ -45,17 +46,17 @@ public class MainController {
     public ArrayList<Map> getStatistiche(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
     	Field[] fields = Data.class.getDeclaredFields();
     	StatBase sb = new StatBase();
-    	ArrayList<Map> lista = new ArrayList<>();
-    	if(fieldName.equals("")) // se non viene specificato nulla, calcolerà le statistiche di ogni attributo
+    	ArrayList<Map> list = new ArrayList<>();
+    	if(fieldName.equals("")) 
     	{  
     		for(int i=0; i < fields.length; i++) {
-    			lista.add(sb.getStatistiche(fields[i].getName()));		
+    			list.add(sb.getStatistiche(fields[i].getName()));		
     		}
-    		return lista;
+    		return list;
     	}
-    	else {  											// altrimenti calcolerà le statistiche del solo attributo richiesto
-    		lista.add(sb.getStatistiche(fieldName));
-    		return lista;
+    	else {  											
+    		list.add(sb.getStatistiche(fieldName));
+    		return list;
     	}
 	}
 	

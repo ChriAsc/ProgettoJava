@@ -55,14 +55,20 @@ public class MainController {
     	Field[] fields = Data.class.getDeclaredFields();
     	StatBase sb = new StatBase();
     	ArrayList<Map> list = new ArrayList<>();
-    	if(fieldName.equals("")) 
+    	if(fieldName.equals("place") || fieldName.equals("location")) 
     	{  
-    		for(int i=0; i < fields.length; i++) {
-    			list.add(sb.getStatistics(fields[i].getName()));		
-    		}
+    		Map<String, Object> err = new LinkedHashMap<>();
+    		err.put("Error", "It's not possible to apply a statistic to this field! (Place or Location)");
+    		list.add(err);
     		return list;
     	}
-    	else {  											
+    	
+    	else {
+    		if(fieldName.equals("created_time")|| fieldName.equals("updated_time")) {
+    			Map<String, Object> err = new LinkedHashMap<>();
+        		err.put("!Attention!", "route '/statdate' is better for fields like created_time or updated_time!");
+        		list.add(err);
+    		}
     		list.add(sb.getStatistics(fieldName));
     		return list;
     	}
@@ -70,33 +76,62 @@ public class MainController {
 	
 	@GetMapping("/statdate")
 	public Map<String, Object> getStatDate(){
-		ArrayList<Number> listYear = new ArrayList<Number>();
-		ArrayList<Number> listMonth = new ArrayList<Number>();
-		ArrayList<Number> listDay = new ArrayList<Number>();
+		ArrayList<Number> listYearC = new ArrayList<Number>();
+		ArrayList<Number> listMonthC = new ArrayList<Number>();
+		ArrayList<Number> listDayC = new ArrayList<Number>();
+		ArrayList<Number> listYearU = new ArrayList<Number>();
+		ArrayList<Number> listMonthU = new ArrayList<Number>();
+		ArrayList<Number> listDayU = new ArrayList<Number>();
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
-			listYear.add(AlbumS.arrData.get(i).getcreated_time().getYear()+1900);
+			listYearC.add(AlbumS.arrData.get(i).getcreated_time().getYear()+1900);
 		}
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
-			listMonth.add(AlbumS.arrData.get(i).getcreated_time().getMonth());
+			listMonthC.add(AlbumS.arrData.get(i).getcreated_time().getMonth()+1);
 		}
 		for(int i=0; i < AlbumS.arrData.size(); i++) {
-			listDay.add(AlbumS.arrData.get(i).getcreated_time().getDay());
-		}		
-		StatNum statY = new StatNum();
-		StatNum statM = new StatNum();
-		StatNum statD = new StatNum();
+			listDayC.add(AlbumS.arrData.get(i).getcreated_time().getDate());
+		}
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listYearU.add(AlbumS.arrData.get(i).getupdated_time().getYear()+1900);
+		}
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listMonthU.add(AlbumS.arrData.get(i).getupdated_time().getMonth()+1);
+		}
+		for(int i=0; i < AlbumS.arrData.size(); i++) {
+			listDayU.add(AlbumS.arrData.get(i).getupdated_time().getDate());
+		}	
+		StatNum statYC = new StatNum();
+		StatNum statMC = new StatNum();
+		StatNum statDC = new StatNum();
+		StatNum statYU = new StatNum();
+		StatNum statMU = new StatNum();
+		StatNum statDU = new StatNum();
 		Map<String, Object> YMD = new LinkedHashMap<>();
-		YMD.put("campY", "Year");
-		for (Map.Entry<String, Object> entry : statY.NumStatDate(listYear).entrySet()) {
-			YMD.put(entry.getKey()+"Y",entry.getValue());
+		YMD.put("fieldC", "CREATED_TIME!");
+		YMD.put("campYC", "Year");
+		for (Map.Entry<String, Object> entry : statYC.NumStatDate(listYearC).entrySet()) {
+			YMD.put(entry.getKey()+"YC",entry.getValue());
 		}
-		YMD.put("campM", "Mouth");
-		for (Map.Entry<String, Object> entry : statM.NumStatDate(listMonth).entrySet()) {
-			YMD.put(entry.getKey()+"M",entry.getValue());
+		YMD.put("campMC", "Month");
+		for (Map.Entry<String, Object> entry : statMC.NumStatDate(listMonthC).entrySet()) {
+			YMD.put(entry.getKey()+"MC",entry.getValue());
 		}
-		YMD.put("campD", "Day");
-		for (Map.Entry<String, Object> entry : statD.NumStatDate(listDay).entrySet()) {
-			YMD.put(entry.getKey()+"D",entry.getValue());
+		YMD.put("campDC", "Day");
+		for (Map.Entry<String, Object> entry : statDC.NumStatDate(listDayC).entrySet()) {
+			YMD.put(entry.getKey()+"DC",entry.getValue());
+		}
+		YMD.put("fieldU", "UPDATED_TIME!");
+		YMD.put("campYU", "Year");
+		for (Map.Entry<String, Object> entry : statYU.NumStatDate(listYearU).entrySet()) {
+			YMD.put(entry.getKey()+"YU",entry.getValue());
+		}
+		YMD.put("campMU", "Month");
+		for (Map.Entry<String, Object> entry : statMU.NumStatDate(listMonthU).entrySet()) {
+			YMD.put(entry.getKey()+"MU",entry.getValue());
+		}
+		YMD.put("campDU", "Day");
+		for (Map.Entry<String, Object> entry : statDU.NumStatDate(listDayU).entrySet()) {
+			YMD.put(entry.getKey()+"DU",entry.getValue());
 		}
 		return YMD;
 		}

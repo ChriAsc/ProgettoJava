@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class Data implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	
 	protected String id;
 	protected boolean can_upload;
 	protected long count;

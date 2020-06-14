@@ -2,7 +2,9 @@ package it.univpm.SpringBootApp.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.text.ParseException;
 
 import org.json.JSONException;
@@ -12,6 +14,8 @@ import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Metadata;
 import it.univpm.SpringBootApp.service.JSONGetAndDecode;
 import it.univpm.SpringBootApp.service.ParserJSON;
+import it.univpm.SpringBootApp.utils.Filter;
+import it.univpm.SpringBootApp.utils.FilterInterface;
 
 /**
  * Classe che forma Arraylist di Dati e Metadati
@@ -19,10 +23,10 @@ import it.univpm.SpringBootApp.service.ParserJSON;
  *
  */
 @Component
-public class Database{
+public class Database implements FilterInterface<Data, Object[]> {
 	public ArrayList<Data> arrData = new ArrayList<>();
 	public ArrayList<Metadata> arrMetadata = new ArrayList<>();
-		
+	protected Filter<Data> f = new Filter<Data>();	
 	/**
 	* Costruttore della classe Database
 	* @throws IOException 
@@ -92,7 +96,7 @@ public class Database{
 	public void fillData() throws IOException, ParseException {
 		File file = new File("dataFile.json");
         if(!file.exists()){
-			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAFtGTA27qFBJGqXXocsd6Dhb7cPkZBqJe8fBs2CpTSCxwakPURSWTTpOgfbCqKNX8XI70cUHOZB4Elny19RlHZCwpbxMKmEH6hH7rPVpUR1BOSmf46Mdz70pQZCtZB1BDYtkUDLiYvlR9NfRO1nW13n9MdGtRQXa3xNIjoqMem4ldDPWzW8e7ZCSGtrBpqliWre8p6KXZANWKwUZAbLOsZAmHyWGrfEdqngZDZD");
+			JSONGetAndDecode download = new JSONGetAndDecode("https://graph.facebook.com/me/albums?fields=id,can_upload,count,created_time,description,event,link,location,name,place,privacy,type,updated_time&access_token=EAAg0XZALFgWIBAHcqFzpUOF3fLBfnQ4hNl9RlZAO6879qdoZBV4pjoQzt8AmohVaXkU3mISmlRYZAWMBZAwdohQHEUd6XR7cZB5Adw1P2dyvzAOxlOCuuOZAGFxqHjCI5yWRDL943W6cftEqRjwxpinwy054qnuSJRiiCzVbz3XyQZDZD");
 			try {
 				download.downloadJson(file.getName());
 			} catch (JSONException e) {
@@ -101,6 +105,12 @@ public class Database{
 		}
         ParserJSON parseFile = new ParserJSON();
         arrData = parseFile.parserJson(file.getName());
+	
+	
 	}
-		
+
+	@Override
+	public ArrayList<Data> filterField(String fieldName, String operator, Object... value) {
+		return (ArrayList<Data>) f.filterMethod(this.getarrData(), fieldName, operator, value);
+	}	
 }

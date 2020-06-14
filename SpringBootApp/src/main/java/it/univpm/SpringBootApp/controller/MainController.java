@@ -3,14 +3,21 @@ package it.univpm.SpringBootApp.controller;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.lang.reflect.Field; 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import it.univpm.SpringBootApp.model.*;
+import it.univpm.SpringBootApp.utils.FilterCheck;
 import it.univpm.SpringBootApp.utils.StatBase;
 import it.univpm.SpringBootApp.utils.StatNum;
 
@@ -119,8 +126,79 @@ public class MainController {
 		
 	}
 	
+	@PostMapping(value = "/filter")
+	public ArrayList<Data> filtering (@RequestBody (required = true) String param) {
+		try {
+			JSONObject json = null;
+			ArrayList<Data> out = new ArrayList<Data>();
+			if (param != null) {
+				try {
+					json = new JSONObject(param);
+					out = parseFilter(AlbumS, json);
+				} catch(Exception e) { }
+			}
+			
+			return out;
+		} catch (Exception e) { }
+		return null;
+	}
 	
+	public ArrayList<Data> parseFilter(Database database, JSONObject jsonObj) {
+		String op = jsonObj.keys().next();
+		if (op.equalsIgnoreCase("$and")){
+			FilterCheck<Data> f = new FilterCheck<Data>();
+			JSONArray jsonArray = jsonObj.getJSONArray(op);
+			ArrayList<ArrayList<Data>> c = new ArrayList<>();
+			for (Object cc : jsonArray) {
+				if (cc instanceof JSONObject) {
+					c.add(parseFilter(database, (JSONObject) cc));
+				}
+			}
+			return f.And(c);
+		}
+		else if (op.equalsIgnoreCase("$or")) {
+			FilterCheck<Data> f = new FilterCheck<Data>();
+			JSONArray jsonArray = jsonObj.getJSONArray(op);
+			ArrayList<ArrayList<Data>> c = new ArrayList<>();
+			for (Object cc : jsonArray) {
+				if (cc instanceof JSONObject) {
+					c.add(parseFilter(database, (JSONObject) cc));
+				}
+			}
+			return f.Or(c);
+		} else {
+			JSONObject innerObj = jsonObj.getJSONObject(op);
+        String operator = innerObj.keys().next();
+        if(operator.equalsIgnoreCase("$bt")) {
+        	double min = innerObj.getJSONArray(operator).getDouble(0);
+            double max = innerObj.getJSONArray(operator).getDouble(1);
+            try {
+				return database.filterField(op, operator, min, max);
+			} catch (SecurityException | IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+        } else if (operator.equalsIgnoreCase("$in") || operator.equalsIgnoreCase("$nin")) {
+        	ArrayList<Object> v = new ArrayList<>();
+            for(Object el : innerObj.getJSONArray(operator)) {
+                v.add(el);
+            }
+            try {
+				return database.filterField(op, operator, v.toArray());
+			} catch (SecurityException | IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+        } else if (operator.equalsIgnoreCase("$gt") || operator.equalsIgnoreCase("$gte") || operator.equalsIgnoreCase("lt") || operator.equalsIgnoreCase("$lte") || operator.equalsIgnoreCase("$eq") || operator.equalsIgnoreCase("$not")) {
+        	try {
+        		Object v = innerObj.get(operator);
+					return database.filterField(op, operator, v);
+				} catch (SecurityException |  IllegalArgumentException e1) {
+					e1.printStackTrace();
+				}
+            }
+        }
+		return null;
+		
+}
 
 	
-
 }

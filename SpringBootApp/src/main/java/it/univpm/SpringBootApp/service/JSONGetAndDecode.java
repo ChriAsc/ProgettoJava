@@ -31,6 +31,7 @@ public class JSONGetAndDecode {
 		public JSONGetAndDecode(String url) throws IOException
 		{
 			this.url = new URL(url);
+		
 		}
 		
 		public void downloadJson (String filename) {
@@ -108,4 +109,5 @@ public class JSONGetAndDecode {
 				e.printStackTrace();
 			}
 		}
+			
 }

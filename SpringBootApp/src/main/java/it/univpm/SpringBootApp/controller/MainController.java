@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import it.univpm.SpringBootApp.model.*;
+import it.univpm.SpringBootApp.service.ParserOperator;
 import it.univpm.SpringBootApp.utils.FilterCheck;
 import it.univpm.SpringBootApp.utils.StatBase;
 import it.univpm.SpringBootApp.utils.StatNum;
@@ -134,7 +135,8 @@ public class MainController {
 			if (param != null) {
 				try {
 					json = new JSONObject(param);
-					out = parseFilter(AlbumS, json);
+					ParserOperator p = new ParserOperator(AlbumS, json);
+					out = p.parseFilter(AlbumS, json);
 				} catch(Exception e) { }
 			}
 			
@@ -142,63 +144,5 @@ public class MainController {
 		} catch (Exception e) { }
 		return null;
 	}
-	
-	public ArrayList<Data> parseFilter(Database database, JSONObject jsonObj) {
-		String op = jsonObj.keys().next();
-		if (op.equalsIgnoreCase("$and")){
-			FilterCheck<Data> f = new FilterCheck<Data>();
-			JSONArray jsonArray = jsonObj.getJSONArray(op);
-			ArrayList<ArrayList<Data>> c = new ArrayList<>();
-			for (Object cc : jsonArray) {
-				if (cc instanceof JSONObject) {
-					c.add(parseFilter(database, (JSONObject) cc));
-				}
-			}
-			return f.And(c);
-		}
-		else if (op.equalsIgnoreCase("$or")) {
-			FilterCheck<Data> f = new FilterCheck<Data>();
-			JSONArray jsonArray = jsonObj.getJSONArray(op);
-			ArrayList<ArrayList<Data>> c = new ArrayList<>();
-			for (Object cc : jsonArray) {
-				if (cc instanceof JSONObject) {
-					c.add(parseFilter(database, (JSONObject) cc));
-				}
-			}
-			return f.Or(c);
-		} else {
-			JSONObject innerObj = jsonObj.getJSONObject(op);
-        String operator = innerObj.keys().next();
-        if(operator.equalsIgnoreCase("$bt")) {
-        	double min = innerObj.getJSONArray(operator).getDouble(0);
-            double max = innerObj.getJSONArray(operator).getDouble(1);
-            try {
-				return database.filterField(op, operator, min, max);
-			} catch (SecurityException | IllegalArgumentException e) {
-				e.printStackTrace();
-			}
-        } else if (operator.equalsIgnoreCase("$in") || operator.equalsIgnoreCase("$nin")) {
-        	ArrayList<Object> v = new ArrayList<>();
-            for(Object el : innerObj.getJSONArray(operator)) {
-                v.add(el);
-            }
-            try {
-				return database.filterField(op, operator, v.toArray());
-			} catch (SecurityException | IllegalArgumentException e) {
-				e.printStackTrace();
-			}
-        } else if (operator.equalsIgnoreCase("$gt") || operator.equalsIgnoreCase("$gte") || operator.equalsIgnoreCase("lt") || operator.equalsIgnoreCase("$lte") || operator.equalsIgnoreCase("$eq") || operator.equalsIgnoreCase("$not")) {
-        	try {
-        		Object v = innerObj.get(operator);
-					return database.filterField(op, operator, v);
-				} catch (SecurityException |  IllegalArgumentException e1) {
-					e1.printStackTrace();
-				}
-            }
-        }
-		return null;
-		
-}
-
 	
 }

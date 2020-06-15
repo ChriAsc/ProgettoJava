@@ -45,7 +45,6 @@ public class Place{
 	 * Metodo che imposta il valore di name_place
 	 * @param name_place
 	 */
-
 	public void setname_place(String name_place) {
 		this.name_place = name_place;
 	}
@@ -54,7 +53,6 @@ public class Place{
 	 * Metodo che imposta il valore di location_place
 	 * @param location_place
 	 */
-
 	public void setlocation_place(Location location_place) {
 		this.location_place = location_place;
 	}
@@ -63,7 +61,6 @@ public class Place{
 	 * Metodo che imposta il valore di id_place
 	 * @param id_place
 	 */
-
 	public void setid_place(String id_place) {
 		this.id_place = id_place;
 	}

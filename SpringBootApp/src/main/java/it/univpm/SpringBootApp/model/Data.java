@@ -17,9 +17,8 @@ import java.util.Locale;
  *
  */
 
-public class Data implements Serializable{
-	
-	
+public class Data{
+		
 	protected String id;
 	protected boolean can_upload;
 	protected long count;
@@ -33,7 +32,6 @@ public class Data implements Serializable{
 	protected String privacy;
 	protected String type;
 	protected Date updated_time;
-
 
 /**
 * Costruttore della classe Data
@@ -71,8 +69,6 @@ String name, Place place, String privacy, String type, Date updated_time) {
 	this.updated_time=updated_time;
 	}
 
-
-
 /**
  * costruttore vuoto per la classe Data
  */
@@ -84,7 +80,6 @@ public Data() {
  * Metodo che restituisce id
  * @return id
  */
-
 public String getid() {
 	return id;
 }
@@ -93,7 +88,6 @@ public String getid() {
  * Metodo che restituisce can_upload
  * @return can_upload
  */
-
 public boolean getcan_upload() {
 	return can_upload;
 }
@@ -102,7 +96,6 @@ public boolean getcan_upload() {
  * Metodo che restituisce count
  * @return count
  */
-
 public long getcount() {
 	return count;
 }
@@ -111,7 +104,6 @@ public long getcount() {
  * Metodo che restituisce created_time
  * @return created_time
  */
-
 public Date getcreated_time() {
 	return created_time;
 }
@@ -120,7 +112,6 @@ public Date getcreated_time() {
  * Metodo che restituisce description
  * @return description
  */
-
 public String getdescription() {
 	return description;
 }
@@ -129,7 +120,6 @@ public String getdescription() {
  * Metodo che restituisce event
  * @return event
  */
-
 public String getevent() {
 	return event;
 }
@@ -138,7 +128,6 @@ public String getevent() {
  * Metodo che restituisce link
  * @return link
  */
-
 public String getlink() {
 	return link;
 }
@@ -147,7 +136,6 @@ public String getlink() {
  * Metodo che restituisce location
  * @return location
  */
-
 public String getlocation() {
 	return location;
 }
@@ -156,7 +144,6 @@ public String getlocation() {
  * Metodo che restituisce name
  * @return name
  */
-
 public String getname() {
 	return name;
 }
@@ -166,7 +153,6 @@ public String getname() {
  * Metodo che restituisce privacy
  * @return privacy
  */
-
 public String getprivacy() {
 	return privacy;
 }
@@ -175,7 +161,6 @@ public String getprivacy() {
  * Metodo che restituisce type
  * @return type
  */
-
 public String gettype() {
 	return type;
 }
@@ -184,7 +169,6 @@ public String gettype() {
  * Metodo che restituisce updated_time
  * @return updated_time
  */
-
 public Date getupdated_time() {
 	return updated_time;
 }
@@ -193,7 +177,6 @@ public Date getupdated_time() {
  * Metodo che restituisce place
  * @return place
  */
-
 public Place getplace() {
 	return place;
 }
@@ -202,7 +185,6 @@ public Place getplace() {
  * Metodo che imposta il valore di id
  * @param id
  */
-
 public void setid(String id) {
 	this.id = id;
 }
@@ -211,7 +193,6 @@ public void setid(String id) {
  * Metodo che imposta il valore di can_upload
  * @param can_upload
  */
-
 public void setcan_upload(boolean can_upload) {
 	this.can_upload = can_upload;
 }
@@ -220,7 +201,6 @@ public void setcan_upload(boolean can_upload) {
  * Metodo che imposta il valore di count
  * @param count
  */
-
 public void setcount(long count) {
 	this.count = count;
 }
@@ -230,7 +210,6 @@ public void setcount(long count) {
  * @param created_time
  * @throws ParseException 
  */
-
 public void setcreated_time(String ct) throws ParseException {
 	DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS", Locale.ITALY);
 	created_time = format.parse(ct);
@@ -240,7 +219,6 @@ public void setcreated_time(String ct) throws ParseException {
  * Metodo che imposta il valore di description
  * @param description
  */
-
 public void setdescription(String description) {
 	this.description = description;
 }
@@ -249,7 +227,6 @@ public void setdescription(String description) {
  * Metodo che imposta il valore di event
  * @param event
  */
-
 public void setevent(String event) {
 	this.event = event;
 }
@@ -258,7 +235,6 @@ public void setevent(String event) {
  * Metodo che imposta il valore di link
  * @param link
  */
-
 public void setlink(String link) {
 	this.link = link;
 }
@@ -267,7 +243,6 @@ public void setlink(String link) {
  * Metodo che imposta il valore di location
  * @param location
  */
-
 public void setlocation(String location) {
 	this.location = location;
 }
@@ -276,7 +251,6 @@ public void setlocation(String location) {
  * Metodo che imposta il valore di name
  * @param name
  */
-
 public void setname(String name) {
 	this.name = name;
 }
@@ -285,7 +259,6 @@ public void setname(String name) {
  * Metodo che imposta il valore di privacy
  * @param privacy
  */
-
 public void setprivacy(String privacy) {
 	this.privacy = privacy;
 }
@@ -294,7 +267,6 @@ public void setprivacy(String privacy) {
  * Metodo che imposta il valore di type
  * @param type
  */
-
 public void settype(String type) {
 	this.type = type;
 }
@@ -303,7 +275,6 @@ public void settype(String type) {
  * Metodo che imposta il valore di updated_time
  * @param updated_time
  */
-
 public void setupdated_time(String ut) throws ParseException {
 	DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS", Locale.ITALY);
 	updated_time = format.parse(ut);
@@ -313,7 +284,6 @@ public void setupdated_time(String ut) throws ParseException {
  * Metodo che imposta il valore di place
  * @param place
  */
-
 public void setplace(Place place) {
 	this.place = place;
 }

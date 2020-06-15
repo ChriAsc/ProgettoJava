@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import it.univpm.SpringBootApp.model.*;
 import it.univpm.SpringBootApp.service.ParserOperator;
-import it.univpm.SpringBootApp.utils.FilterCheck;
 import it.univpm.SpringBootApp.utils.StatBase;
 import it.univpm.SpringBootApp.utils.StatNum;
 

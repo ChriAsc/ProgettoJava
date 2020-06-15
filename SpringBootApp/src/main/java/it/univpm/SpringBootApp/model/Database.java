@@ -2,9 +2,7 @@ package it.univpm.SpringBootApp.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.text.ParseException;
 
 import org.json.JSONException;
@@ -27,6 +25,7 @@ public class Database implements FilterInterface<Data, Object[]> {
 	public ArrayList<Data> arrData = new ArrayList<>();
 	public ArrayList<Metadata> arrMetadata = new ArrayList<>();
 	protected Filter<Data> f = new Filter<Data>();	
+	
 	/**
 	* Costruttore della classe Database
 	* @throws IOException 

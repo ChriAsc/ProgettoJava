@@ -17,7 +17,6 @@ public class FilterCheck<T> {
 	 * @param obj Valore su cui il filtro viene applicato
 	 * @return true se il valore deve essere inserito, false in caso contrario
 	 * @author Cristian Cingolani & Christian Ascani
-	 * 
 	 */
 	public static boolean check(Object value, String operator, Object... obj) {
 		if (obj.length==1 && obj[0] instanceof Number && value instanceof Number) {

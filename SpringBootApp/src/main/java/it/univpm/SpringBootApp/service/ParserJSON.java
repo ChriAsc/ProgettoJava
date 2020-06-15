@@ -24,11 +24,9 @@ public class ParserJSON {
 
 	/**
 	 * Metodo per parsare il file json in classi Data, collezionati come Arraylist
-	 *
 	 * @param fileName nome del json da parsare
 	 * @return ritorna l'ArrayList
 	 * @throws java.text.ParseException 
-	 *
 	**/
 	public ArrayList<Data> parserJson(String fileName) throws java.text.ParseException
     {
@@ -39,7 +37,6 @@ public class ParserJSON {
 	        JSONArray arr = (JSONArray) object.get("data");
 	        for(int i=0; i<arr.size(); i++){
 	        	Data a = new Data();
-	        	//filling Album a
 	            JSONObject array = (JSONObject) arr.get(i);
 	            if(array.get("id")!=null)
 	            {
@@ -93,8 +90,7 @@ public class ParserJSON {
             	l.setlongitude_location(0.0);
             	l.setzip_location("null");
             	p.setid_place("null");
-	            
-	            
+	            	            
 	            if((JSONObject) array.get("place") != null) {
 	            	JSONObject places = (JSONObject) array.get("place");
 	            	String name = (String) places.get("name");
@@ -121,9 +117,8 @@ public class ParserJSON {
 	            	
 	            	a.setplace(p);
 	            }
-	            	
-	            
-	            Albums.add(a);																//adding album to ArrayList of Album
+	            		            
+	            Albums.add(a);																
 	        }
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

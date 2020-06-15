@@ -3,11 +3,8 @@ package it.univpm.SpringBootApp.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import it.univpm.SpringBootApp.model.Data;
 
@@ -15,7 +12,6 @@ import it.univpm.SpringBootApp.model.Data;
  * Classe che permette di filtrare tramite parametri specifici
  * @param <Data> Tipo specifico Data, ovvero quello dell'album
  * @author Cristian Cingolani & Christian Ascani
- * 
  */
 public class Filter<T> {
 	

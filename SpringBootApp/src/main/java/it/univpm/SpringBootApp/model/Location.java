@@ -63,7 +63,6 @@ public class Location{
 	 * Metodo che imposta il valore di city_location
 	 * @param city_location
 	 */
-
 	public void setcity_location(String city_location) {
 		this.city_location = city_location;
 	}
@@ -71,8 +70,7 @@ public class Location{
 	/**
 	 * Metodo che imposta il valore di country_location
 	 * @param country_location
-	 */
-	
+	 */	
 	public void setcountry_location(String country_location) {
 		this.country_location = country_location;
 	}
@@ -80,8 +78,7 @@ public class Location{
 	/**
 	 * Metodo che imposta il valore di latitude_location
 	 * @param latitude_location
-	 */
-	
+	 */	
 	public void setlatitude_location(double latitude_location) {
 		this.latitude_location = latitude_location;
 	}
@@ -90,7 +87,6 @@ public class Location{
 	 * Metodo che imposta il valore di longitude_location
 	 * @param longitude_location
 	 */
-	
 	public void setlongitude_location(double longitude_location) {
 		this.longitude_location = longitude_location;
 	}
@@ -98,8 +94,7 @@ public class Location{
 	/**
 	 * Metodo che imposta il valore di zip_location
 	 * @param zip_location
-	 */
-	
+	 */	
 	public void setzip_location(String zip_location) {
 		this.zip_location = zip_location;
 	}

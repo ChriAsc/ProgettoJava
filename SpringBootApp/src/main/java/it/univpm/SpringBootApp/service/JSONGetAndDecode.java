@@ -20,7 +20,6 @@ import org.json.simple.parser.ParseException;
 
 public class JSONGetAndDecode {
 
-	//private URL link;
 	private URL url;
 	
 		/**
@@ -63,7 +62,7 @@ public class JSONGetAndDecode {
 				 System.out.println("Data read correctly!");
 				 System.out.println("Parsing the json...");
 				
-				JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	 		//parse JSON Object                     		//parse JSON Array
+				JSONObject obj = (JSONObject) JSONValue.parseWithException(data);	 		                    		
 				System.out.println("JSON parsed!");
 				System.out.println("Starting download file JSON...");
 								
@@ -72,21 +71,21 @@ public class JSONGetAndDecode {
 					file.flush();
 					System.out.println("Download completed!");					 
 				 } 
-				catch (FileAlreadyExistsException e) 	         							//this exception is thrown when the file already exists
+				catch (FileAlreadyExistsException e) 	         							
 				{					
 					File dataFile = new File(filename);
-					String fileDataString =	dateFormat.format(dataFile.lastModified());		//get the data of the last edit of the file
+					String fileDataString =	dateFormat.format(dataFile.lastModified());		
 					Date fileData = null;					
 					try {
-						fileData = dateFormat.parse(fileDataString);                        //convert the data of the file into date type
+						fileData = dateFormat.parse(fileDataString);                      
 					} catch (java.text.ParseException ex) {
 						ex.printStackTrace();
 					}
-					if(fileData.compareTo(date)<0)			//.compareTo method returns the value 0 if the argument date is equal to this Date; a value less than 0 if this Date is before the date argument; and a value greater than 0 if this Date is after the Date argument
+					if(fileData.compareTo(date)<0)			
 						System.out.println("The data file already exists | Last edit: " + fileDataString);
 					else
 					{						
-						if (dataFile.delete())	{											//the old data file is deleted and then the new data is downloaded
+						if (dataFile.delete())	{											
 							try (FileWriter file = new FileWriter(filename)) {
 								file.write(obj.toJSONString());
 								file.flush();

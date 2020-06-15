@@ -9,31 +9,53 @@ import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Database;
 import it.univpm.SpringBootApp.utils.FilterCheck;
 
+/**
+ * Classe utilizzata per filtrare i contenuti del dataset in base ai filtri specificati
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class ParserOperator {
-	protected Database db;
-	protected JSONObject json;
+	protected Database database;
+	protected JSONObject jsonObj;
 	
-	public ParserOperator(Database db, JSONObject json) {
-		this.db = db;
-		this.json = json;
+	/**
+	 * Costruttore
+	 * @param database Dataset intero su cui poi verrà fatto il filtraggio
+	 * @param jsonObj JSONObject che rappresenta il filtro passato nella chiamata
+	 */
+	public ParserOperator(Database database, JSONObject jsonObj) {
+		this.database = database;
+		this.jsonObj = jsonObj;
 	}
 	
+	/**
+	 * Metodo che esegue il filtraggio dei contenuti del dataset, basandosi sull'oggetto passato come filtro
+	 * @param database Dataset che viene effettivamente filtrato
+	 * @param jsonObj Oggetto che viene passato come filtro
+	 * @return ArrayList con i dati filtrati
+	 */
 	public ArrayList<Data> parseFilter(Database database, JSONObject jsonObj) {
-		String op = jsonObj.keys().next();
-		if (op.equalsIgnoreCase("$and")) {
-			FilterCheck<Data> f = new FilterCheck<Data>();
-			return f.And(andCase(database, jsonObj, op));
+		String operator = jsonObj.keys().next();
+		if (operator.equalsIgnoreCase("$and")) {
+			FilterCheck<Data> check = new FilterCheck<Data>();
+			return check.And(logLinkOpCase(database, jsonObj, operator));
 		}
-		else if (op.equalsIgnoreCase("$or")) {
-			FilterCheck<Data> f = new FilterCheck<Data>();
-			return f.Or(orCase(database, jsonObj, op));
+		else if (operator.equalsIgnoreCase("$or")) {
+			FilterCheck<Data> check = new FilterCheck<Data>();
+			return check.Or(logLinkOpCase(database, jsonObj, operator));
 		} else {
-			return noLogicalLinkOperator(database, jsonObj, op);
+			return noLogLinkOpCase(database, jsonObj, operator);
         	}
 		
 	}
 	
-	public ArrayList<ArrayList<Data>> andCase (Database db, JSONObject json, String loglinkOp) {
+	/**
+	 * Metodo che permette di eseguire il filtraggio nel caso in cui vengono passati gli operatori logici "AND" "OR"
+	 * @param db Dataset che viene effettivamente filtrato
+	 * @param json Oggetto che viene passato come filtro
+	 * @param loglinkOp Operatore logico passato
+	 * @return ArrayList con dati filtrati
+	 */
+	public ArrayList<ArrayList<Data>> logLinkOpCase (Database db, JSONObject json, String loglinkOp) {
 		JSONArray jsonArray = json.getJSONArray(loglinkOp);
 		ArrayList<ArrayList<Data>> c = new ArrayList<>();
 		for (Object cc : jsonArray) {
@@ -43,19 +65,15 @@ public class ParserOperator {
 		}
 		return c;
 	}
-	
-	public ArrayList<ArrayList<Data>> orCase (Database db, JSONObject json, String loglinkOp) {
-		JSONArray jsonArray = json.getJSONArray(loglinkOp);
-		ArrayList<ArrayList<Data>> c = new ArrayList<>();
-		for (Object cc : jsonArray) {
-			if (cc instanceof JSONObject) {
-				c.add(parseFilter(db, (JSONObject) cc));
-			}
-		}
-		return c;
-	}
-	
-	public ArrayList<Data> noLogicalLinkOperator (Database db, JSONObject json, String op) {
+
+	/**
+	 * Metodo che permette di eseguire il filtraggio nel caso in cui non vengono passati operatori logici e siano presenti gli altri
+	 * @param db Dataset che viene effettivamente filtrato
+	 * @param json Oggetto che viene passato come filtro
+	 * @param op Operatore passato (non "AND" o "OR")
+	 * @return ArrayList con dati filtrati
+	 */
+	public ArrayList<Data> noLogLinkOpCase (Database db, JSONObject json, String op) {
 		JSONObject innerObj = json.getJSONObject(op);
         String operator = innerObj.keys().next();
         if(operator.equalsIgnoreCase("$bt")) {
@@ -68,8 +86,8 @@ public class ParserOperator {
 			}
         } else if (operator.equalsIgnoreCase("$in") || operator.equalsIgnoreCase("$nin")) {
         	ArrayList<Object> v = new ArrayList<>();
-            for(Object el : innerObj.getJSONArray(operator)) {
-                v.add(el);
+            for(Object obj : innerObj.getJSONArray(operator)) {
+                v.add(obj);
             }
             try {
 				return db.filterField(op, operator, v.toArray());
@@ -78,8 +96,8 @@ public class ParserOperator {
 			}
         } else if (operator.equalsIgnoreCase("$gt") || operator.equalsIgnoreCase("$gte") || operator.equalsIgnoreCase("lt") || operator.equalsIgnoreCase("$lte") || operator.equalsIgnoreCase("$eq") || operator.equalsIgnoreCase("$not")) {
         	try {
-        		Object v = innerObj.get(operator);
-					return db.filterField(op, operator, v);
+        		Object obj = innerObj.get(operator);
+					return db.filterField(op, operator, obj);
 				} catch (SecurityException |  IllegalArgumentException e1) {
 					e1.printStackTrace();
 				}

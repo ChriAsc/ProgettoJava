@@ -41,7 +41,7 @@ public class StatBase {
 		Database db = new Database();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> Errore = new HashMap<>();
-		Errore.put("Error", "It's not possible to apply a statistic to this field!");
+		Errore.put("Error", "A statistic to this field cannot be requested.");
 		Field[] fields = Data.class.getDeclaredFields();		
 		for (Field f : fields) 
 		{

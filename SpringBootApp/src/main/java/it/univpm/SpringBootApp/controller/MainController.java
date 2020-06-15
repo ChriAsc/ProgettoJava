@@ -58,7 +58,7 @@ public class MainController {
     	if(fieldName.equals("place") || fieldName.equals("location")) 
     	{  
     		Map<String, Object> err = new LinkedHashMap<>();
-    		err.put("Error", "It's not possible to apply a statistic to this field! (Place or Location)");
+    		err.put("Error", "A statistic to this field (Place or Location) cannot be requested.");
     		list.add(err);
     		return list;
     	}
@@ -66,7 +66,7 @@ public class MainController {
     	else {
     		if(fieldName.equals("created_time")|| fieldName.equals("updated_time")) {
     			Map<String, Object> err = new LinkedHashMap<>();
-        		err.put("!Attention!", "route '/statdate' is better for fields like created_time or updated_time!");
+        		err.put("!Warning!", "Please use route '/statdate' to request statistic about created_time or updated_time!");
         		list.add(err);
     		}
     		list.add(sb.getStatistics(fieldName));
@@ -74,6 +74,9 @@ public class MainController {
     	}
 	}
 	
+	/**
+     * Rotta che restituisce le statistiche riguardanti anno, mesee giorno in base al campo inserito
+     */
 	@GetMapping("/statdate")
 	public Map<String, Object> getStatDate(){
 		ArrayList<Number> listYearC = new ArrayList<Number>();
@@ -136,6 +139,9 @@ public class MainController {
 		return YMD;
 		}
 	
+	/**
+     * Rotta che restituisce il numero di album pubblicati in base annuale, mensile o giornaliera a seconda del campo specificato
+     */
 	@GetMapping("/statisto")
 	public Map<String, Object> getIsto(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
 		ArrayList<Number> listIsto = new ArrayList<Number>();
@@ -162,6 +168,9 @@ public class MainController {
 		
 	}
 	
+	/**
+     * Rotta che restituisce dati filtrati
+     */
 	@PostMapping(value = "/filter")
 	public ArrayList<Data> filtering (@RequestBody (required = true) String param) {
 		try {
@@ -176,7 +185,9 @@ public class MainController {
 			}
 			
 			return out;
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			e.printStackTrace();
+			}
 		return null;
 	}
 	

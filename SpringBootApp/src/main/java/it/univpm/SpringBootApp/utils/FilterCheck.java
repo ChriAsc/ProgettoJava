@@ -61,7 +61,7 @@ public class FilterCheck<T> {
 	
 	/**
      * Metodo utilizzato per implementare la logica AND qualora venga richiesta nel filtraggio
-     * @param data Collection di Data
+     * @param data ArrayList di ArrayList di Data
      * @return Restituisce la collection
      */
     public ArrayList<Data> And (ArrayList<ArrayList<Data>> data) {
@@ -88,8 +88,8 @@ public class FilterCheck<T> {
     
     /**
      * Metodo utilizzato per implementare la logica OR qualora venga richiesta nel filtraggio
-     * @param data Collection di Data
-     * @return Restituisce l'insieme
+     * @param data ArrayList di ArrayList di Data
+     * @return Restituisce l'insieme come ArrayList
      */
     public ArrayList<Data> Or (ArrayList<ArrayList<Data>> data) {
         Set<Data> set = new HashSet<Data>();

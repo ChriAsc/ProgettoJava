@@ -35,8 +35,12 @@ public class StatBase {
 	 * @throws NoSuchMethodException 
 	 * @throws ParseException 
 	 * @throws IOException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
 	 */
-	public Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException 
+	public Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
 	{
 		Database db = new Database();
 		Map<String, Object> map = new HashMap<>();
@@ -61,10 +65,14 @@ public class StatBase {
 	 * @param field
 	 * @param list 
 	 * @return val
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
 	 */
-	public ArrayList<Object> fieldValues(String field, ArrayList<Data> list) {
+	public ArrayList<Object> fieldValues(String field, ArrayList<Data> list) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		ArrayList<Object> val = new ArrayList<>();
-		try {
 			Field[] fields = Data.class.getDeclaredFields();
 			for(Object e : list) { 
 				for(int i=0; i < fields.length; i++) {
@@ -74,24 +82,12 @@ public class StatBase {
 						val.add(specificval); 
 					}
 				}
-			}
-		} catch(NoSuchMethodException ex) {
-			ex.printStackTrace();
-		} catch(SecurityException ex) {
-			ex.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			e1.printStackTrace();
-		} catch (IllegalArgumentException e1) {
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			e1.printStackTrace();
-		}
+			}	
 		return val;
 	}
 	
 	/**
 	 * Metodo che serve a visualizzare il tipo di statistiche in base al campo specificato
-	 * 
 	 * @param field 
 	 * @param list
 	 * @return map

@@ -16,7 +16,7 @@ import it.univpm.SpringBootApp.model.Data;
 public class Filter<T> {
 	
 	/**
-     * Metodo che filtra l'intera collection di Data su un campo, con una definita condizione e 
+     * Metodo che filtra l'intera collection di Data su un campo, con una definita condizione e operatore
      * @param source Collection intera da filtrare
      * @param fieldName Campo su cui il filtro opera
      * @param operator Operatore

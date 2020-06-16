@@ -30,8 +30,8 @@ public class StatBase {
 	 * Questo metodo prende in ingresso il nome del campo field passato
 	 * verifica se la mappa viene riempita
 	 * ed in caso contrario ritorna un messaggio di errore
-	 * @param field
-	 * @return map 
+	 * @param field campo su cui eseguire la statistica 
+	 * @return map mappa riempita con dati filtrati
 	 * @throws NoSuchMethodException 
 	 * @throws ParseException 
 	 * @throws IOException 
@@ -62,9 +62,9 @@ public class StatBase {
 	 * Questo metodo prende in ingresso il campo fieldName passato
 	 * verifica che questo campo rientri tra quelli possibili
 	 * e lo aggiunge all'arraylist values
-	 * @param field
-	 * @param list 
-	 * @return val
+	 * @param field campo su cui eseguire la statistica 
+	 * @param list arraylist di data usato per verificare che il campo field rientri tra quelli possibili 
+	 * @return val ArrayList di oggetti ritornati dopo la verifica
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 * @throws InvocationTargetException 
@@ -88,9 +88,9 @@ public class StatBase {
 	
 	/**
 	 * Metodo che serve a visualizzare il tipo di statistiche in base al campo specificato
-	 * @param field 
-	 * @param list
-	 * @return map
+	 * @param field campo su cui eseguire la statistica 
+	 * @param list arraylist di oggetti 
+	 * @return map mappa con statistiche di tipo Stringa o Numerico
 	 */
     public Map<String, Object> getStat(String field, ArrayList<Object> list) {
 		Map<String, Object> map = new HashMap<>();
@@ -112,8 +112,8 @@ public class StatBase {
     
     /**
 	 * Questo metodo che conta le volte in cui i valori di lista si ripetono
-	 * @param list
-	 * @return map
+	 * @param list arraylist di oggetti 
+	 * @return map mappa contenente il campo specifico di ciascun album con numero ricorsioni
 	 */
 	public Map<Object, Integer> getElem(ArrayList<Object> list) {
 		Map<Object,Integer> map = new HashMap<>();  

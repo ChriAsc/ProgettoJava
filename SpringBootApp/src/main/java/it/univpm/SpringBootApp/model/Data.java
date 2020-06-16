@@ -1,22 +1,17 @@
 package it.univpm.SpringBootApp.model;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.Locale;
-//import java.util.ArrayList;
-
-//import it.univpm.SpringBootApp.model.Place;
 
 /**
  * Classe che descrive Dati
  * @author Cristian Cingolani & Christian Ascani
  *
  */
-
 public class Data{
 		
 	protected String id;

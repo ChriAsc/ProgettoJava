@@ -1,12 +1,24 @@
 package it.univpm.SpringBootApp.model;
 
+/**
+ * Classe per dati di tipo Location
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class Location{
 	protected String city_location;
 	protected String country_location;
 	protected double latitude_location;
 	protected double longitude_location;
 	protected String zip_location;
-	
+		
+	/**
+	 * Costruttore classe Location
+	 * @param city_location
+	 * @param country_location
+	 * @param latitude_location
+	 * @param longitude_location
+	 * @param zip_location
+	 */
 	public Location (String city_location, String country_location, double latitude_location, double longitude_location, String zip_location) {
 		this.city_location=city_location;
 		this.country_location=country_location;
@@ -15,6 +27,9 @@ public class Location{
 		this.zip_location=zip_location;
 	}
 	
+	/**
+	 * costruttore vuoto per la classe Location
+	 */
 	public Location() {
 		
 	}

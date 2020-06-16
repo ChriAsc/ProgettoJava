@@ -7,7 +7,6 @@ import java.util.Collection;
  * @param <E> Tipo dell'oggetto da filtrare
  * @param <T> Tipo del valore utilizzato per filtrare l'oggetto
  * @author Cristian Cingolani & Christian Ascani
- * 
  */
 public interface FilterInterface<E,T> {
 	

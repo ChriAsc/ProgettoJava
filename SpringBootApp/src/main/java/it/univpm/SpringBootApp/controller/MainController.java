@@ -19,6 +19,10 @@ import it.univpm.SpringBootApp.utils.StatBase;
 import it.univpm.SpringBootApp.utils.StatNum;
 
 @RestController
+/**
+ * Classe per per gestione delle varie rotte
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class MainController {
 	
 	/**

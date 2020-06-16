@@ -2,17 +2,30 @@ package it.univpm.SpringBootApp.model;
 
 import it.univpm.SpringBootApp.model.Location;
 
+/**
+ * Classe per dati di tipo Place
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class Place{
 	protected String name_place;
 	protected Location location_place;
 	protected String id_place;	
 	
+	/**
+	 * Costruttore classe Place
+	 * @param name_place
+	 * @param location_place
+	 * @param id_place
+	 */
 	public Place(String name_place, Location location_place, String id_place) {
 				this.name_place=name_place;
 				this.location_place=location_place;
 				this.id_place=id_place;
 	}
 	
+	/**
+	 * Costruttore vuoto classe Place
+	 */
 	public Place() {
 		
 	}

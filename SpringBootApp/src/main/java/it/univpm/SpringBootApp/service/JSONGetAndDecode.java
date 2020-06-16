@@ -18,6 +18,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Classe per download di dati
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class JSONGetAndDecode {
 
 	private URL url;
@@ -33,6 +37,10 @@ public class JSONGetAndDecode {
 		
 		}
 		
+		/**
+		 * Metodo per download di dati
+		 * @param filename nome del file su cui eseguire il download dei dati
+		 */
 		public void downloadJson (String filename) {
 			
 			DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);					

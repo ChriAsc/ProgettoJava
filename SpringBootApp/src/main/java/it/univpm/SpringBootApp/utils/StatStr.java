@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Sottoclasse per calcolo statistiche di tipo string
+ * @author Cingolani Cristian & Ascani Christian
+ */
 public class StatStr extends StatBase{
 	
 	/**
@@ -15,9 +19,9 @@ public class StatStr extends StatBase{
 	/**
 	 * Metodo che prende in ingresso l'arraylist list ed il campo field  
 	 * restituisce una mappa con tutte le statistiche di tipo stringa
-	 * @param list
-	 * @param field
-	 * @return map
+	 * @param list arraylist di oggetti
+	 * @param field campo su cui eseguire statistiche riguardanti stringhe
+	 * @return map mappa restituita contenente un campo dei vari album con le ricorsioni
 	 */
 	public Map<String, Object> StrStat(String field, ArrayList<Object> list) {
 		StatNum sn = new StatNum();

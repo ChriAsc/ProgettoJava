@@ -8,6 +8,11 @@ import java.util.Set;
 
 import it.univpm.SpringBootApp.model.Data;
 
+/**
+ * Classe per il controllo di operatori
+ * @param <Data> Tipo specifico Data, ovvero quello dell'album
+ * @author Cristian Cingolani & Christian Ascani
+ */
 public class FilterCheck<T> {
 	
 	/**

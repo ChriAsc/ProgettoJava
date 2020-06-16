@@ -3,9 +3,7 @@ package it.univpm.SpringBootApp.model;
 /**
  * Classe che descrive Metadati
  * @author Cristian Cingolani & Christian Ascani
- *
  */
-
 public class Metadata {
 	private String spec, type;
 	

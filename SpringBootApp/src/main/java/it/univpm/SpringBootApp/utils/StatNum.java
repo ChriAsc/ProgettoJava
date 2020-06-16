@@ -8,7 +8,6 @@ import java.util.Map;
  * Sottoclasse per calcolo statistiche di tipo numerico
  * @author Cingolani Cristian & Ascani Christian
  */
-
 public class StatNum{
 	
 	private double sum;
@@ -140,9 +139,9 @@ public class StatNum{
     /**
      * Metodo che riceve in ingresso un particolare field ed un arraylist di number
      * restituisce una mappa con tutte le statistiche di tipo numerico
-     * @param field
-     * @param numList
-     * @return map
+     * @param field campo su cui eseguire la statistica 
+     * @param numList arraylist di numeri su cui eseguire le statistiche di tipo numerico
+     * @return map mappa restituita contenente le statistiche di tipo numerico
      */
     public Map<String, Object> NumStat(String field, ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>(); 
@@ -165,8 +164,8 @@ public class StatNum{
     /**
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * restituisce una mappa con tutte le statistiche di tipo numerico (per la data)
-	 * @param numList
-	 * @return map
+	 * @param numList arraylist di numeri su cui eseguire le statistiche di tipo numerico
+	 * @return map mappa restituita contenente le statistiche di tipo numerico
 	 * */
     public Map<String, Object> NumStatDate(ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>();  
@@ -188,8 +187,8 @@ public class StatNum{
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun anno (dal 2010 al 2020)
 	 * restituisce una map con tutti gli anni(chiave) e con le relative occorrenze(valore)
-	 * @param numList
-	 * @return map
+	 * @param numList arraylist di numeri contenente tutti gli anni di created_time o updated_time dei vari album
+	 * @return map mappa restituita contenente il numero di album con created_time o updated_time aventi un certo anno
 	 * */
     public Map<String, Object> StatIstoYear(ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>();
@@ -220,8 +219,8 @@ public class StatNum{
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun mese
 	 * restituisce una map con tutti i mesi(chiave) e con le relative occorrenze(valore)
-	 * @param numList 
-	 * @return map
+	 * @param numList arraylist di numeri contenente tutti i mesi di created_time o updated_time dei vari album
+	 * @return map mappa restituita contenente il numero di album con created_time o updated_time aventi un certo mese
 	 * */
     public Map<String, Object> StatIstoMonth(ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>();
@@ -253,8 +252,8 @@ public class StatNum{
 	 * Metodo che riceve in ingresso un arraylist di number
 	 * calcola il numero di album pubblicati in ciascun giorno
 	 * restituisce una map con tutti i giorni(chiave) e con le relative occorrenze(valore)
-	 * @param numList
-	 * @return map
+	 * @param numList arraylist di numeri contenente tutti i giorni di created_time o updated_time dei vari album
+	 * @return map mappa restituita contenente il numero di album con created_time o updated_time aventi un certo giorno
 	 * */   
     public Map<String, Object> StatIstoDay(ArrayList<Number> numList) {
     	Map<String, Object> map = new LinkedHashMap<>();
@@ -300,6 +299,5 @@ public class StatNum{
     	map.put("30",days[29]);
     	map.put("31",days[30]);
     	return map;	
-    }
-   
+    } 
 }

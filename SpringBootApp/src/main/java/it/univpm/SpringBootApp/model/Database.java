@@ -18,7 +18,6 @@ import it.univpm.SpringBootApp.utils.FilterInterface;
 /**
  * Classe che forma Arraylist di Dati e Metadati
  * @author Cristian Cingolani & Christian Ascani
- *
  */
 @Component
 public class Database implements FilterInterface<Data, Object[]> {
@@ -29,7 +28,7 @@ public class Database implements FilterInterface<Data, Object[]> {
 	/**
 	* Costruttore della classe Database
 	* @throws IOException 
-	*@throws NoSuchMethodException 
+	* @throws NoSuchMethodException 
 	* @throws ParseException 
 	*/
 	public Database() throws IOException, NoSuchMethodException, ParseException
@@ -88,7 +87,6 @@ public class Database implements FilterInterface<Data, Object[]> {
 	/**
 	 * Metodo che si occupa del riempimento di arrData 
 	 * sulla base dei valori scaricati ed estratti dal Parser
-	 * @param Data
 	 * @throws ParseException 
 	 * @throws IOException
 	 */

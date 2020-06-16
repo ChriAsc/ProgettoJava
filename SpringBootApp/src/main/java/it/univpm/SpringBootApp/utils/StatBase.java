@@ -40,6 +40,7 @@ public class StatBase {
 	 * @throws IllegalAccessException 
 	 * @throws SecurityException 
 	 */
+    
 	public Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
 	{
 		Database db = new Database();

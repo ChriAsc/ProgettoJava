@@ -78,7 +78,7 @@ public class Database implements FilterInterface<Data, Object[]> {
 	
 	/**
 	 * Metodo che inserisce in arrData un elemento di tipo Data
-	 * @param Data
+	 * @param d ArrayList di Data
 	 */
 	public void setArrData(ArrayList<Data> d) {
 		arrData.addAll(d);

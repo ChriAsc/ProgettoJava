@@ -10,7 +10,7 @@ import it.univpm.SpringBootApp.model.Data;
 
 /**
  * Classe che permette di filtrare tramite parametri specifici
- * @param <Data> Tipo specifico Data, ovvero quello dell'album
+ * @param T Tipo specifico (Data nel caso), ovvero quello dell'album
  * @author Cristian Cingolani & Christian Ascani
  */
 public class Filter<T> {

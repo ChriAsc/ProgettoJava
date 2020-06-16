@@ -202,7 +202,7 @@ public void setcount(long count) {
 
 /**
  * Metodo che imposta il valore di created_time
- * @param created_time
+ * @param ct
  * @throws ParseException 
  */
 public void setcreated_time(String ct) throws ParseException {
@@ -268,7 +268,7 @@ public void settype(String type) {
 
 /**
  * Metodo che imposta il valore di updated_time
- * @param updated_time
+ * @param ut
  */
 public void setupdated_time(String ut) throws ParseException {
 	DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS", Locale.ITALY);

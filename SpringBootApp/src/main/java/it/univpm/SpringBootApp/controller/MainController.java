@@ -32,24 +32,29 @@ public class MainController {
 	private Database AlbumS;
 	
 	/**
-     * Rotta che restituisce tutti i metadati
-     */
+	 * Rotta che restituisce tutti i metadati
+	 * @return ArrayList dei Metadati
+	 */
 	@GetMapping("/metadata")
 	public ArrayList<Metadata> getMetaData() {
 		return AlbumS.getarrMetadata();
 	}
 	
 	/**
-     * Rotta che restituisce tutti i dati
-     */
+	 * Rotta che restituisce tutti i dati
+	 * @return ArrayList di tutti i dati
+	 */
 	@GetMapping("/data")
 	public ArrayList<Data> getData() {
 		return AlbumS.getarrData();
 	}
 	
 	/**
-     * Rotta che restituisce le statistiche in base al campo inserito
-     */
+	 * Rotta che restituisce le statistiche in base al campo inserito
+	 * @param fieldName Campo inserito
+	 * @return ArrayList di Map con tutte le statistiche inerenti al campo inserito
+	 * @throws Exception
+	 */
 	@GetMapping("/statistiche")
     public ArrayList<Map> getStatistics(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
     	Field[] fields = Data.class.getDeclaredFields();
@@ -75,8 +80,9 @@ public class MainController {
 	}
 	
 	/**
-     * Rotta che restituisce le statistiche riguardanti anno, mesee giorno in base al campo inserito
-     */
+	 * Rotta che restituisce le statistiche riguardanti anno, mese e giorno in base al campo inserito
+	 * @return Mappa delle statistiche annuali, mensili, giornaliere
+	 */
 	@GetMapping("/statdate")
 	public Map<String, Object> getStatDate(){
 		ArrayList<Number> listYearC = new ArrayList<Number>();
@@ -140,8 +146,11 @@ public class MainController {
 		}
 	
 	/**
-     * Rotta che restituisce il numero di album pubblicati in base annuale, mensile o giornaliera a seconda del campo specificato
-     */
+	 * Rotta che restituisce il numero di album pubblicati in base annuale, mensile o giornaliera a seconda del campo specificato
+	 * @param fieldName Campo inserito
+	 * @return Mappa con il numero di album pubblicati secondo il campo inserito
+	 * @throws Exception
+	 */
 	@GetMapping("/statisto")
 	public Map<String, Object> getIsto(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
 		ArrayList<Number> listIsto = new ArrayList<Number>();
@@ -169,8 +178,10 @@ public class MainController {
 	}
 	
 	/**
-     * Rotta che restituisce dati filtrati
-     */
+	 * Rotta che restituisce dati filtrati
+	 * @param param Filtro passato
+	 * @return ArrayList dei dati filtrati
+	 */
 	@PostMapping(value = "/filter")
 	public ArrayList<Data> filtering (@RequestBody (required = true) String param) {
 		try {

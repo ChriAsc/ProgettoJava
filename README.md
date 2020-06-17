@@ -300,4 +300,4 @@ Qui vengono riportati i diagrammi UML inerenti all’applicazione
 ![Sequence Diagram](https://github.com/ChriAsc/ProgettoJava/blob/master/Basic%20UML%20Sequence%20Diagram.png)
 
 ## Diagramma delle classi
-![Class Diagram](https://github.com/ChriAsc/ProgettoJava/blob/master/UML%20Class%20Diagram.png)
+![Class Diagram](https://github.com/ChriAsc/ProgettoJava/blob/master/UML%20Class.png)

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import it.univpm.SpringBootApp.exceptions.InvalidFieldException;
 import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Database;
 import it.univpm.SpringBootApp.utils.FilterCheck;
@@ -32,8 +33,9 @@ public class ParserOperator {
 	 * @param database Dataset che viene effettivamente filtrato
 	 * @param jsonObj Oggetto che viene passato come filtro
 	 * @return ArrayList con i dati filtrati
+	 * @throws InvalidFieldException 
 	 */
-	public ArrayList<Data> parseFilter(Database database, JSONObject jsonObj) {
+	public ArrayList<Data> parseFilter(Database database, JSONObject jsonObj) throws InvalidFieldException {
 		String operator = jsonObj.keys().next();
 		if (operator.equalsIgnoreCase("$and")) {
 			FilterCheck<Data> check = new FilterCheck<Data>();
@@ -54,8 +56,9 @@ public class ParserOperator {
 	 * @param json Oggetto che viene passato come filtro
 	 * @param loglinkOp Operatore logico passato
 	 * @return ArrayList con dati filtrati
+	 * @throws InvalidFieldException 
 	 */
-	public ArrayList<ArrayList<Data>> logLinkOpCase (Database db, JSONObject json, String loglinkOp) {
+	public ArrayList<ArrayList<Data>> logLinkOpCase (Database db, JSONObject json, String loglinkOp) throws InvalidFieldException {
 		JSONArray jsonArray = json.getJSONArray(loglinkOp);
 		ArrayList<ArrayList<Data>> c = new ArrayList<>();
 		for (Object cc : jsonArray) {
@@ -72,8 +75,9 @@ public class ParserOperator {
 	 * @param json Oggetto che viene passato come filtro
 	 * @param op Operatore passato (non "AND" o "OR")
 	 * @return ArrayList con dati filtrati
+	 * @throws InvalidFieldException 
 	 */
-	public ArrayList<Data> noLogLinkOpCase (Database db, JSONObject json, String op) {
+	public ArrayList<Data> noLogLinkOpCase (Database db, JSONObject json, String op) throws InvalidFieldException {
 		JSONObject innerObj = json.getJSONObject(op);
         String operator = innerObj.keys().next();
         if(operator.equalsIgnoreCase("$bt")) {
@@ -102,6 +106,6 @@ public class ParserOperator {
 					e1.printStackTrace();
 				}
         	}
-		return null;
+        throw new InvalidFieldException("A filter cannot be requested because the body is not correct.");
 	}
 }

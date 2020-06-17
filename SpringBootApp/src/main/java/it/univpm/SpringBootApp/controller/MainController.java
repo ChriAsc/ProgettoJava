@@ -3,7 +3,10 @@ package it.univpm.SpringBootApp.controller;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.univpm.SpringBootApp.exceptions.InvalidFieldException;
 import it.univpm.SpringBootApp.model.*;
 import it.univpm.SpringBootApp.service.ParserOperator;
 import it.univpm.SpringBootApp.utils.StatBase;
@@ -53,21 +57,22 @@ public class MainController {
 	 * Rotta che restituisce le statistiche in base al campo inserito
 	 * @param fieldName Campo inserito
 	 * @return ArrayList di Map con tutte le statistiche inerenti al campo inserito
-	 * @throws Exception
+	 * @throws InvalidFieldException
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
 	 */
 	@GetMapping("/statistiche")
-    public ArrayList<Map> getStatistics(@RequestParam(value = "field", defaultValue = "") String fieldName) throws Exception {
+    public ArrayList<Map> getStatistics(@RequestParam(value = "field", defaultValue = "") String fieldName) throws InvalidFieldException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, ParseException {
     	Field[] fields = Data.class.getDeclaredFields();
     	StatBase sb = new StatBase();
     	ArrayList<Map> list = new ArrayList<>();
-    	if(fieldName.equals("place") || fieldName.equals("location")) 
-    	{  
-    		Map<String, Object> err = new LinkedHashMap<>();
-    		err.put("Error", "A statistic to this field (Place or Location) cannot be requested.");
-    		list.add(err);
-    		return list;
-    	}
-    	
+    	if(fieldName.equals("place") || fieldName.equals("location_place")) 
+    		throw new InvalidFieldException("A statistic to this field cannot be requested.");
     	else {
     		if(fieldName.equals("created_time")|| fieldName.equals("updated_time")) {
     			Map<String, Object> err = new LinkedHashMap<>();
@@ -181,25 +186,23 @@ public class MainController {
 	 * Rotta che restituisce dati filtrati
 	 * @param param Filtro passato
 	 * @return ArrayList dei dati filtrati
+	 * @throws InvalidFieldException 
 	 */
 	@PostMapping(value = "/filter")
-	public ArrayList<Data> filtering (@RequestBody (required = true) String param) {
-		try {
-			JSONObject json = null;
-			ArrayList<Data> out = new ArrayList<Data>();
-			if (param != null) {
-				try {
-					json = new JSONObject(param);
-					ParserOperator p = new ParserOperator(AlbumS, json);
-					out = p.parseFilter(AlbumS, json);
-				} catch(Exception e) { }
-			}
-			
+	public ArrayList<Data> filtering (@RequestBody (required = true) String param) throws InvalidFieldException {
+		JSONObject json = null;
+		ArrayList<Data> out = new ArrayList<Data>();
+		if (param != "") {
+			try {
+				json = new JSONObject(param);
+				ParserOperator p = new ParserOperator(AlbumS, json);
+				out = p.parseFilter(AlbumS, json);
+			} catch(Exception e) { }
 			return out;
-		} catch (Exception e) {
-			e.printStackTrace();
-			}
-		return null;
+		}
+		else throw new InvalidFieldException("A filter cannot be requested because the body is empty");
+		
+		
 	}
 	
 }

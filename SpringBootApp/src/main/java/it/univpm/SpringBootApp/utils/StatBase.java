@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.univpm.SpringBootApp.exceptions.InvalidFieldException;
 import it.univpm.SpringBootApp.model.Data;
 import it.univpm.SpringBootApp.model.Database;
 
@@ -39,22 +40,21 @@ public class StatBase {
 	 * @throws IllegalArgumentException 
 	 * @throws IllegalAccessException 
 	 * @throws SecurityException 
+	 * @throws InvalidFieldException 
 	 */
     
-	public Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
+	public static Map<String, Object> getStatistics(String field) throws NoSuchMethodException, IOException, ParseException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InvalidFieldException 
 	{
 		Database db = new Database();
 		Map<String, Object> map = new HashMap<>();
-		Map<String, Object> Errore = new HashMap<>();
-		Errore.put("Error", "A statistic to this field cannot be requested.");
+		
 		Field[] fields = Data.class.getDeclaredFields();		
 		for (Field f : fields) 
 		{
 			if(field.equalsIgnoreCase(f.getName())) 
 				map = getStat(field, fieldValues(field, db.getarrData()));
 		}
-		if(map.isEmpty())
-			return Errore;
+		if(map.isEmpty()) throw new InvalidFieldException("A statistic to this field cannot be requested.");
 		else 
 			return map;
 	}
@@ -72,7 +72,7 @@ public class StatBase {
 	 * @throws IllegalArgumentException 
 	 * @throws IllegalAccessException 
 	 */
-	public ArrayList<Object> fieldValues(String field, ArrayList<Data> list) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public static ArrayList<Object> fieldValues(String field, ArrayList<Data> list) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		ArrayList<Object> val = new ArrayList<>();
 			Field[] fields = Data.class.getDeclaredFields();
 			for(Object e : list) { 
@@ -93,7 +93,7 @@ public class StatBase {
 	 * @param list arraylist di oggetti 
 	 * @return map mappa con statistiche di tipo Stringa o Numerico
 	 */
-    public Map<String, Object> getStat(String field, ArrayList<Object> list) {
+    public static Map<String, Object> getStat(String field, ArrayList<Object> list) {
 		Map<String, Object> map = new HashMap<>();
 		StatNum statN = new StatNum();
 		StatStr statS = new StatStr();

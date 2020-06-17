@@ -7,7 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Classe di test alla classe modello Data (ovvero l'Album)
+ * @author Cristian Cingolani & Christian Ascani
+ *
+ */
 class DataTests {
 
 	private Data album = null;

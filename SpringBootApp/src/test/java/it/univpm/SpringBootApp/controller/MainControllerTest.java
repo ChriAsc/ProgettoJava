@@ -23,6 +23,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import it.univpm.SpringBootApp.exceptions.InvalidFieldException;
 import it.univpm.SpringBootApp.utils.StatBase;
 
+/**
+ * Classe di test al MainController con metodi relativi
+ * @author Cristian Cingolani & Christian Ascani
+ *
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(MainController.class)
 class MainControllerTest {

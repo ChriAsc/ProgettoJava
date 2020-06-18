@@ -71,7 +71,7 @@ public class MainController {
     	Field[] fields = Data.class.getDeclaredFields();
     	StatBase sb = new StatBase();
     	ArrayList<Map> list = new ArrayList<>();
-    	if(fieldName.equals("place") || fieldName.equals("location_place")) 
+    	if(fieldName.equals("place") || fieldName.equals("location_place") || fieldName.equals("id_place") || fieldName.equals("city_location") || fieldName.equals("place") || fieldName.equals("country_location") || fieldName.equals("latitude_location") || fieldName.equals("longitude_location") || fieldName.equals("zip_location")) 
     		throw new InvalidFieldException("A statistic to this field cannot be requested.");
     	else {
     		if(fieldName.equals("created_time")|| fieldName.equals("updated_time")) {
@@ -178,7 +178,7 @@ public class MainController {
 				}
 				return statIsto.StatIstoDay(listIsto);
 			}
-		return null;
+			else throw new InvalidFieldException("A statistic istogram to this field cannot be requested.");
 		
 	}
 	

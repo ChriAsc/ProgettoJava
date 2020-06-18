@@ -285,7 +285,9 @@ La relativa risposta:
 Si sono gestite con i metodi try-catch, throw e classe InvalidFieldException
 
 ## TEST
-Le classi di Test sono 3: DataTest, StatBaseTest e MainControllerTest. La prima, contenuta nel package it.univpm.SpringBootApp.model, serve per testare l'effettiva struttura della classe Data, inizializzando un album e verificandolo. La seconda, contenuta nel package it.univpm.SpringBootApp.utils, viene utilizzata per verificare il lancio dell'eccezione InvalidFieldException (sia quando non si passa alcun field sia quando si passa un field sbagliato). La terza, contenuta nel package it.univpm.SpringBootApp.controller. testa le rotte */data*, */metadata*, */statistiche*, in cui si verifica che - passando come field "place" oppure "location_place" - viene lanciata InvalidFieldException, e */filtering*. 
+Le classi di Test sono 3: DataTest, StatBaseTest e MainControllerTest.
+
+La prima, contenuta nel package it.univpm.SpringBootApp.model, serve per testare l'effettiva struttura della classe Data, inizializzando un album e verificandolo. La seconda, contenuta nel package it.univpm.SpringBootApp.utils, viene utilizzata per verificare il lancio dell'eccezione InvalidFieldException (sia quando non si passa alcun field sia quando si passa un field sbagliato). La terza, contenuta nel package it.univpm.SpringBootApp.controller. testa le rotte */data*, */metadata*, */statistiche*, in cui si verifica che - passando come field "place" oppure "location_place" - viene lanciata InvalidFieldException, e */filtering*. 
 
 ## Librerie esterne
 Si sono utilizzate le seguenti librerie:
@@ -302,7 +304,9 @@ Qui vengono riportati i diagrammi UML inerenti all’applicazione
 ## Diagramma delle classi
 ![Class Diagram](https://github.com/ChriAsc/ProgettoJava/blob/master/UML%20Class.png)
 
+
 **Studenti:** Cristian Cingolani (S1082504) & Christian Ascani (S1084723)
-### Divisione del lavoro
+#### Divisione del lavoro
 Cingolani Cristian: Model (Dati, Metadati e Database), Statistiche (con implementazione nel controller), UML.
+
 Ascani Christian: Download e Parser, Filter (con implementazione nel controller), Eccezioni, test.
